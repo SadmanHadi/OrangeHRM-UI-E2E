@@ -47,7 +47,7 @@ jobs:
           docker compose up -d
           echo "Waiting for OrangeHRM to become available..."
           for i in $(seq 1 60); do
-            if curl -fs http://localhost > /dev/null 2>&1 && curl -fs http://localhost/web/index.php/auth/login > /dev/null 2>&1; then
+            if curl -fsL http://localhost/web/index.php/auth/login > /dev/null 2>&1; then
               echo "OrangeHRM is ready!"
               exit 0
             fi
