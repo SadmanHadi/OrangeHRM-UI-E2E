@@ -72,7 +72,7 @@ The project uses a secure, dual-layer environment management system:
 ## 📂 Project Structure
 
 ```text
-orangehrm-playwright/
+.
 ├── .github/workflows/
 │   └── playwright.yml      ← CI/CD pipeline (Matrix Strategy)
 ├── artifacts/
