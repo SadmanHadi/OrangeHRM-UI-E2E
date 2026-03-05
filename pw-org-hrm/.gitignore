@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Environment / Secret
+.env
+auth.json
+artifacts/auth/
+
+# System / IDE
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# Build / Temporary
+dist/
+build/
+tmp/

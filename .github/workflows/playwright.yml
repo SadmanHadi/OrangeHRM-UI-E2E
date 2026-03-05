@@ -1,0 +1,107 @@
+name: OrangeHRM E2E Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [chromium, firefox, webkit, edge]
+
+    defaults:
+      run:
+        working-directory: pw-org-hrm
+
+    steps:
+      # ── Checkout ───────────────────────────────────────────────────────────
+      - uses: actions/checkout@v4
+
+      # ── Node.js ────────────────────────────────────────────────────────────
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      # ── pnpm ───────────────────────────────────────────────────────────────
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      # ── Dependencies ───────────────────────────────────────────────────────
+      - name: Install dependencies
+        run: pnpm install
+
+      # ── Playwright browsers ─────────────────────────────────────────────────
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install ${{ matrix.project }} --with-deps
+
+      # ── Start OrangeHRM via Docker Compose ─────────────────────────────────
+      - name: Start OrangeHRM (Docker)
+        run: |
+          docker compose up -d
+          echo "Waiting for OrangeHRM to become available..."
+          for i in $(seq 1 30); do
+            if curl -fs http://localhost/web/index.php/auth/login > /dev/null 2>&1; then
+              echo "OrangeHRM is ready!"
+              break
+            fi
+            echo "  attempt $i/30 — not ready yet, sleeping 10s..."
+            sleep 10
+          done
+
+      # ── Write .env for the test run ─────────────────────────────────────────
+      - name: Create .env
+        run: |
+          cat <<EOF > .env
+          BASE_URL=${{ secrets.BASE_URL }}
+          ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}
+          ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
+          HEADLESS=true
+          EOF
+
+      # ── Run UI tests (parallel via matrix) ─────────────────────────────────
+      - name: Run E2E tests
+        run: pnpm exec playwright test --project=${{ matrix.project }}
+        env:
+          CI: "true"
+          BASE_URL: ${{ secrets.BASE_URL }}
+          ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          HEADLESS: "true"
+
+      # ── Stop OrangeHRM ───────────────────────────────────────────────────--
+      - name: Stop OrangeHRM (Docker)
+        if: always()
+        run: docker compose down -v
+
+      # ── Upload Monocart report ───────────────────────────────────────────--
+      - name: Upload Monocart report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monocart-report-${{ matrix.project }}
+          path: pw-org-hrm/playwright-report/monocart/
+          retention-days: 30
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report-${{ matrix.project }}
+          path: pw-org-hrm/playwright-report/html/
+          retention-days: 30
+
+      - name: Upload test traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces-${{ matrix.project }}
+          path: pw-org-hrm/test-results/
+          retention-days: 30
