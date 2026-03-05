@@ -1,17 +1,16 @@
 version: '3.8'
 
 services:
-  mariadb:
+  ohrm-db:
     image: mariadb:10.11
     environment:
       MARIADB_ROOT_PASSWORD: root_password
-      MARIADB_DATABASE: orangehrm
       MARIADB_USER: orangehrm
       MARIADB_PASSWORD: orangehrm_password
     volumes:
       - mariadb_data:/var/lib/mysql
     healthcheck:
-      test: ['CMD', 'mariadb-admin', 'ping', '-h', 'localhost']
+      test: ['CMD', 'mariadb-admin', 'ping', '-h', 'localhost', '-uroot', '-proot_password']
       interval: 10s
       timeout: 5s
       retries: 10
@@ -19,7 +18,7 @@ services:
   orangehrm:
     image: orangehrm/orangehrm:latest
     environment:
-      ORANGE_DB_HOST: mariadb
+      ORANGE_DB_HOST: ohrm-db
       ORANGE_DB_PORT: 3306
       ORANGE_DB_NAME: orangehrm
       ORANGE_DB_USER: orangehrm
@@ -29,7 +28,7 @@ services:
     ports:
       - '80:80'
     depends_on:
-      mariadb:
+      ohrm-db:
         condition: service_healthy
     volumes:
       - orangehrm_data:/var/www/html/src/log

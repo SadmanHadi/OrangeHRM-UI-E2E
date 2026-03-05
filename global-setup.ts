@@ -38,13 +38,17 @@ async function globalSetup(_config: FullConfig) {
       isReady = true;
       break;
     } catch (e) {
-      console.log(`  [global-setup] OrangeHRM login UI not ready, retrying in 10s (attempt ${i + 1}/30)...`);
+      console.log(
+        `  [global-setup] OrangeHRM login UI not ready, retrying in 10s (attempt ${i + 1}/30)...`
+      );
       await page.waitForTimeout(10_000);
     }
   }
 
   if (!isReady) {
-    throw new Error('OrangeHRM UI failed to render the login page after 5 minutes. Initialization timeout.');
+    throw new Error(
+      'OrangeHRM UI failed to render the login page after 5 minutes. Initialization timeout.'
+    );
   }
 
   await page.getByPlaceholder('Username').fill(username);
