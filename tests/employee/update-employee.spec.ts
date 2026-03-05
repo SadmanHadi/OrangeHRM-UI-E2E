@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { EmployeePage } from '../../src/pages/EmployeePage';
 import { uniqueName } from '../../src/utils/timestamp';
-import { createEmployee } from '../../src/setup/employee.setup';
+import { createEmployee, deleteEmployee } from '../../src/setup/employee.setup';
 
 test.describe('Employee - Update', () => {
   let firstName: string;
@@ -15,6 +15,11 @@ test.describe('Employee - Update', () => {
 
     // Setup: Create the employee
     await createEmployee(page, firstName, lastName);
+  });
+ 
+  test.afterEach(async ({ page }) => {
+    // Cleanup: Remove the employee
+    await deleteEmployee(page, firstName);
   });
 
   test('should update employee last name successfully and verify change', async ({ page }) => {

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ClaimPage } from '../../src/pages/ClaimPage';
 import { uniqueName } from '../../src/utils/timestamp';
-import { createClaimWithEvent } from '../../src/setup/claim.setup';
+import { createClaimWithEvent, deleteClaimAndEvent } from '../../src/setup/claim.setup';
 
 test.describe('Claim (Self) - Update', () => {
   let eventName: string;
@@ -13,6 +13,11 @@ test.describe('Claim (Self) - Update', () => {
 
     // Setup: Create both event and claim
     await createClaimWithEvent(page, eventName, remarks);
+  });
+ 
+  test.afterEach(async ({ page }) => {
+    // Cleanup: Remove both dependencies
+    await deleteClaimAndEvent(page, eventName);
   });
 
   test('should update claim status to Cancelled successfully', async ({ page }) => {

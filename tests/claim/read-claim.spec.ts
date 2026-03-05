@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ClaimPage } from '../../src/pages/ClaimPage';
 import { uniqueName } from '../../src/utils/timestamp';
-import { createClaimWithEvent } from '../../src/setup/claim.setup';
+import { createClaimWithEvent, deleteClaimAndEvent } from '../../src/setup/claim.setup';
 
 test.describe('Claim (Self) - Read', () => {
   test.setTimeout(120000);
@@ -17,10 +17,10 @@ test.describe('Claim (Self) - Read', () => {
     await createClaimWithEvent(page, eventName, remarks);
   });
 
-  // test.afterEach(async ({ page }) => {
-  //   // Cleanup disabled per user request
-  //   // await deleteClaimAndEvent(page, eventName);
-  // });
+  test.afterEach(async ({ page }) => {
+    // Cleanup: Remove both claim and event dependencies
+    await deleteClaimAndEvent(page, eventName);
+  });
 
   test('should find the newly created claim in the My Claims list and view details', async ({
     page,

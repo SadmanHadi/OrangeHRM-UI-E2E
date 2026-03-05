@@ -50,6 +50,7 @@ export default defineConfig({
       },
     ],
     ['html', { outputFolder: 'playwright-report/html', open: 'never' }],
+    ['json', { outputFile: 'playwright-report/results.json' }],
     ['list'],
   ],
 

@@ -40,76 +40,104 @@ End-to-End UI test automation for **OrangeHRM**, built with **Playwright + TypeS
 
 ## 📋 Prerequisites
 
-| Requirement   | Version                         |
-| ------------- | ------------------------------- |
-| **Node.js**   | v18+                            |
-| **pnpm**      | v9+                             |
-| **Docker**    | Latest (for CI / Docker local)  |
-| **OrangeHRM** | Installed locally or via Docker |
+Before setting up the project, ensure you have the following installed:
+
+- **Node.js**: v18.0.0 or higher (LTS recommended)
+- **pnpm**: v9.0.0 or higher
+- **Docker & Docker Compose**: Latest version (required for local containerized environment and CI)
 
 ---
 
-## 🔐 Secret Management (Local vs CI)
+## ⚙️ Install Steps
 
-The project uses a secure, dual-layer environment management system:
+1. **Clone the repository**:
 
-### 🏠 Local Development
+   ```bash
+   git clone <repository-url>
+   cd OrangeHRM-UI-E2E
+   ```
 
-1. **File**: `.env` (Ignored by Git for security)
-2. **Setup**: Copy `.env.example` to `.env`.
-3. **Usage**: `dotenv` automatically loads these into `process.env`.
+2. **Install dependencies**:
 
-### 🚀 CI (GitHub Actions)
+   ```bash
+   pnpm install
+   ```
 
-1. **Mechanism**: GitHub Actions **Secrets**.
-2. **Setup**: Go to `Settings > Secrets and variables > Actions` and add:
-   - `BASE_URL`: Root URL of your instance.
-   - `ADMIN_USERNAME`: Admin User.
-   - `ADMIN_PASSWORD`: Admin Password.
-3. **Internal Logic**: The `playwright.yml` workflow dynamically creates an ephemeral `.env` from these secrets during the run.
-
----
-
-## 📂 Project Structure
-
-```text
-.
-├── .github/workflows/
-│   └── playwright.yml      ← CI/CD pipeline (Matrix Strategy)
-├── artifacts/
-│   └── auth/               ← Auth session storage (storageState.json)
-├── src/
-│   ├── pages/              ← Page Object Model classes
-│   ├── setup/              ← Preparation helpers (Employee, Claim, etc.)
-│   └── utils/              ← Shared utilities (timestamps, unique IDs)
-├── tests/
-│   ├── advanced/           ← Advanced tasks (Loop, Dynamic ID)
-│   ├── claim/              ← Claim module CRUD
-│   ├── employee/           ← Employee module CRUD (Production Hardened)
-│   ├── event/              ← Event module CRUD
-│   └── leave-type/         ← Leave Type module CRUD
-├── eslint.config.mjs       ← Modern ESLint Flat Config
-├── .prettierrc             ← Formatting configuration
-├── docker-compose.yml      ← Container orchestration
-├── global-setup.ts         ← Server health-check + Auth preparation
-├── playwright.config.ts    ← Playwright engine configuration
-├── package.json            ← Scripts & dependencies
-└── tsconfig.json           ← TypeScript strict mode config
-```
+3. **Install Playwright Browsers**:
+   ```bash
+   pnpm exec playwright install --with-deps
+   ```
 
 ---
 
-## Available Scripts
+## 🏠 Run Locally
 
-| Install deps | `pnpm install` |
-| Run all tests | `pnpm test` |
-| Run with UI | `pnpm test:ui` |
+The project is fully autonomous. Docker management (start/stop) and application installation are handled automatically via Playwright's global lifecycle hooks.
+
+1. **Configure Environment Variables**:
+   Copy the example environment file and fill in your details:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   _Required local values:_
+   - `BASE_URL=http://localhost`
+   - `ADMIN_USERNAME=admin`
+   - `ADMIN_PASSWORD=Admin@1234`
+
+2. **Run Tests**:
+   Simply run the test command. Playwright will start the Docker containers, perform any necessary installation, and shut them down after the run.
+   - **All Tests**: `pnpm test`
+   - **UI Mode**: `pnpm test:ui` (interactive)
+   - **Single Project**: `pnpm exec playwright test --project=chromium`
 
 ---
 
-## Known Limitations & Assumptions
+## 🚀 Run in CI
 
-1. **Session Handling** — OrangeHRM (open-source) can occasionally invalidate previous sessions when the same user logs in again. To mitigate this, the suite uses a one-time `globalSetup` to share storage state, and the **CI Matrix Strategy** further isolates browser contexts into separate VMs to ensure sequential stability within parallel runs.
-2. **Docker first run** — the Bitnami OrangeHRM container takes **2–3 minutes** to initialize its database on the very first boot.
-3. **Concurrency Limits** — While the suite is 100% parallel-safe logically, local execution of 16 simultaneous browser workers may bottleneck on lower-spec hardware; for these cases, running single-project tests or utilizing interactive UI mode is recommended.
-4. **No negative tests** — current coverage focuses on happy-path CRUD operations as specified in the requirements.
+The project uses **GitHub Actions** for continuous integration.
+
+### 🔐 Configuration (Secrets)
+
+To run tests in CI, you MUST configure the following secrets in your GitHub repository (**Settings > Secrets and variables > Actions**):
+
+| Secret Name      | Description                                                   |
+| ---------------- | ------------------------------------------------------------- |
+| `BASE_URL`       | The URL of the OrangeHRM instance (e.g., `http://localhost`). |
+| `ADMIN_USERNAME` | Admin username for the application.                           |
+| `ADMIN_PASSWORD` | Admin password for the application.                           |
+
+### 🛠️ Workflow
+
+The workflow is defined in `.github/workflows/playwright.yml`. It is streamlined for performance:
+
+1. **Environment Setup**: Installs Node.js, pnpm, and Playwright browsers.
+2. **Autonomous Execution**: Runs `pnpm exec playwright test`, which triggers:
+   - **Global Setup**: Starts Docker, waits for readiness, and runs `scripts/install-orangehrm.js` if needed.
+   - **Matrix Testing**: Executes tests across multiple browsers in parallel.
+   - **Global Teardown**: Automatically stops and removes Docker containers after all tests finish.
+
+---
+
+## 📊 Reports
+
+After running tests, reports are generated and can be viewed as follows:
+
+- **Playwright HTML Report**:
+  - Location: `playwright-report/html/index.html`
+  - Command: `pnpm exec playwright show-report`
+- **Monocart HTML Report**:
+  - Location: `playwright-report/monocart/index.html` (A single-file portable HTML report)
+- **CI Artifacts**:
+  - In GitHub Actions, reports are uploaded as artifacts for each matrix job. Download them from the workflow summary page.
+
+---
+
+## ⚠️ Known Limitations & Assumptions
+
+1. **Initialization Delay**: The Bitnami OrangeHRM container takes **2–3 minutes** to initialize its database on the very first boot. Tests include a health-check loop to wait for readiness.
+2. **Session Handling**: To ensure stability, the suite uses a one-time `globalSetup` to perform an admin login and save the session state (`storageState.json`).
+3. **Hardware Constraints**: Local execution of 16+ simultaneous workers may bottleneck on lower-spec machines. Default local workers are limited to 4.
+4. **Data Isolation**: Every test is designed to be atomic; they create their own unique data and clean it up where possible using `uniqueName()` utilities to avoid collisions.
+5. **No Negative Path Coverage**: Current coverage focuses on happy-path CRUD operations across Employee, Claim, Leave, and Event modules.

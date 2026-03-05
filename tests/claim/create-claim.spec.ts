@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { ClaimPage } from '../../src/pages/ClaimPage';
 import { EventPage } from '../../src/pages/EventPage';
 import { uniqueName } from '../../src/utils/timestamp';
+import { deleteClaimAndEvent } from '../../src/setup/claim.setup';
 
 test.describe('Claim (Self) - Create', () => {
   test.setTimeout(120000);
@@ -16,6 +17,11 @@ test.describe('Claim (Self) - Create', () => {
     // Manual setup for Event to keep Claim atomic
     const eventPage = new EventPage(page);
     await eventPage.create(eventName);
+  });
+ 
+  test.afterEach(async ({ page }) => {
+    // Cleanup: Remove both claim and event
+    await deleteClaimAndEvent(page, eventName);
   });
 
   test('should successfully create a self-claim with mandatory event', async ({ page }) => {

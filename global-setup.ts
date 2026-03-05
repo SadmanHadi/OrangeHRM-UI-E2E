@@ -1,6 +1,7 @@
 import { chromium, FullConfig } from '@playwright/test';
 import * as path from 'path';
 import * as fs from 'fs';
+import { execSync } from 'child_process';
 
 const AUTH_FILE = path.join(__dirname, 'artifacts', 'auth', 'storageState.json');
 
@@ -9,6 +10,14 @@ const AUTH_FILE = path.join(__dirname, 'artifacts', 'auth', 'storageState.json')
  * Playwright will reuse the storage state across all test workers.
  */
 async function globalSetup(_config: FullConfig) {
+  // 1. Start OrangeHRM local server (Docker)
+  console.log('[global-setup] Ensuring OrangeHRM is running via Docker Compose...');
+  try {
+    execSync('docker compose up -d', { stdio: 'inherit' });
+  } catch (error) {
+    console.warn('[global-setup] Warning: docker compose up failed. Assuming server is already running or managed externally.');
+  }
+
   const baseURL = process.env.BASE_URL;
   const username = process.env.ADMIN_USERNAME;
   const password = process.env.ADMIN_PASSWORD;
@@ -31,15 +40,25 @@ async function globalSetup(_config: FullConfig) {
 
   // Robust readiness loop: Wait for DB initialization and UI rendering
   let isReady = false;
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 40; i++) {
     try {
-      await page.goto(baseURL, { waitUntil: 'load', timeout: 60_000 });
+      await page.goto(baseURL, { waitUntil: 'load', timeout: 30_000 });
+      const content = await page.content();
+      
+      // If we see the installer, run the installation script
+      if (content.includes('oxd-button') && !content.includes('auth-login')) {
+        console.log('[global-setup] Installer detected. Running automated installation...');
+        execSync('node scripts/install-orangehrm.js', { stdio: 'inherit' });
+        // Refresh page after installation
+        await page.goto(baseURL, { waitUntil: 'load', timeout: 30_000 });
+      }
+
       await page.getByPlaceholder('Username').waitFor({ state: 'visible', timeout: 10_000 });
       isReady = true;
       break;
     } catch (e) {
       console.log(
-        `  [global-setup] OrangeHRM login UI not ready, retrying in 10s (attempt ${i + 1}/60)...`
+        `  [global-setup] OrangeHRM not ready yet, retrying in 10s (attempt ${i + 1}/40)...`
       );
       await page.waitForTimeout(10_000);
     }

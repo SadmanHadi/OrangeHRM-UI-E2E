@@ -1,6 +1,7 @@
 const { chromium } = require('@playwright/test');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 (async () => {
   const screenshotDir = path.join(__dirname, 'artifacts', 'screenshots');
@@ -15,9 +16,13 @@ const path = require('path');
   const context = await browser.newContext();
   const page = await context.newPage();
 
+  const baseURL = process.env.BASE_URL || 'http://127.0.0.1';
+  const adminUsername = process.env.ADMIN_USERNAME || 'admin';
+  const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@1234';
+
   try {
-    console.log('Navigating to OrangeHRM Installer...');
-    await page.goto('http://127.0.0.1', { waitUntil: 'load', timeout: 30000 });
+    console.log(`Navigating to OrangeHRM Installer at ${baseURL}...`);
+    await page.goto(baseURL, { waitUntil: 'load', timeout: 30000 });
     await page.screenshot({ path: path.join(screenshotDir, '00_start.png') });
 
     // 1. Welcome Screen
@@ -79,7 +84,7 @@ const path = require('path');
         has: page.locator('label:has-text("Privileged Database User Password")'),
       })
       .locator('input')
-      .fill('root_password');
+      .fill(process.env.DB_ROOT_PASSWORD || 'root_password');
 
     await page.screenshot({ path: path.join(screenshotDir, '03_database_filled.png') });
     await page.locator('.oxd-button:has-text("Next")').first().click();
@@ -132,7 +137,7 @@ const path = require('path');
     await page
       .locator('.oxd-input-group', { has: page.locator('label:has-text("Admin Username")') })
       .locator('input.oxd-input')
-      .fill('admin');
+      .fill(adminUsername);
 
     // Email
     console.log('Filling Email...');
@@ -144,11 +149,11 @@ const path = require('path');
     // Password
     console.log('Filling Password...');
     const passwordInputs = page.locator('input[type="password"]');
-    await passwordInputs.nth(0).fill('Admin@1234');
+    await passwordInputs.nth(0).fill(adminPassword);
 
     // Confirm Password
     console.log('Filling Confirm Password...');
-    await passwordInputs.nth(1).fill('Admin@1234');
+    await passwordInputs.nth(1).fill(adminPassword);
 
     await page.screenshot({ path: path.join(screenshotDir, '06_admin_filled.png') });
     await page.locator('.oxd-button:has-text("Next")').first().click();

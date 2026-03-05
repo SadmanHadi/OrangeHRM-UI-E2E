@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { EmployeePage } from '../../src/pages/EmployeePage';
 import { uniqueName } from '../../src/utils/timestamp';
-import { createEmployee } from '../../src/setup/employee.setup';
+import { createEmployee, deleteEmployee } from '../../src/setup/employee.setup';
 
 test.describe('Employee - Read', () => {
   let firstName: string;
@@ -12,6 +12,11 @@ test.describe('Employee - Read', () => {
 
     // Setup: Create the employee using the setup helper
     await createEmployee(page, firstName, lastName);
+  });
+ 
+  test.afterEach(async ({ page }) => {
+    // Cleanup: Remove the employee
+    await deleteEmployee(page, firstName);
   });
 
   test('should find the newly created employee in the list with correct details', async ({
