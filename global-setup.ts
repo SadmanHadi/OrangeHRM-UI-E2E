@@ -28,7 +28,25 @@ async function globalSetup(_config: FullConfig) {
   const page = await context.newPage();
 
   console.log(`[global-setup] Logging in at ${baseURL}…`);
-  await page.goto(baseURL, { waitUntil: 'load', timeout: 60_000 });
+
+  // Robust readiness loop: Wait for DB initialization and UI rendering
+  let isReady = false;
+  for (let i = 0; i < 30; i++) {
+    try {
+      await page.goto(baseURL, { waitUntil: 'load', timeout: 60_000 });
+      await page.getByPlaceholder('Username').waitFor({ state: 'visible', timeout: 10_000 });
+      isReady = true;
+      break;
+    } catch (e) {
+      console.log(`  [global-setup] OrangeHRM login UI not ready, retrying in 10s (attempt ${i + 1}/30)...`);
+      await page.waitForTimeout(10_000);
+    }
+  }
+
+  if (!isReady) {
+    throw new Error('OrangeHRM UI failed to render the login page after 5 minutes. Initialization timeout.');
+  }
+
   await page.getByPlaceholder('Username').fill(username);
   await page.getByPlaceholder('Password').fill(password);
   await page.getByRole('button', { name: /login/i }).click();
