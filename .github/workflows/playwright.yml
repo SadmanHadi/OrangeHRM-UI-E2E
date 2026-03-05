@@ -71,7 +71,7 @@ jobs:
           node scripts/install-orangehrm.js
 
           # Final check to ensure login page is truly ready
-          if ! curl -fsL http://localhost | grep -q "Username"; then
+          if ! curl -fsL http://localhost | grep -q "auth-login"; then
             echo "ERROR: OrangeHRM login page failed to render after installation"
             docker compose logs
             exit 1
