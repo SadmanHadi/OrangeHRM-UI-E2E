@@ -31,7 +31,7 @@ async function globalSetup(_config: FullConfig) {
 
   // Robust readiness loop: Wait for DB initialization and UI rendering
   let isReady = false;
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 60; i++) {
     try {
       await page.goto(baseURL, { waitUntil: 'load', timeout: 60_000 });
       await page.getByPlaceholder('Username').waitFor({ state: 'visible', timeout: 10_000 });
@@ -39,7 +39,7 @@ async function globalSetup(_config: FullConfig) {
       break;
     } catch (e) {
       console.log(
-        `  [global-setup] OrangeHRM login UI not ready, retrying in 10s (attempt ${i + 1}/30)...`
+        `  [global-setup] OrangeHRM login UI not ready, retrying in 10s (attempt ${i + 1}/60)...`
       );
       await page.waitForTimeout(10_000);
     }
@@ -47,7 +47,7 @@ async function globalSetup(_config: FullConfig) {
 
   if (!isReady) {
     throw new Error(
-      'OrangeHRM UI failed to render the login page after 5 minutes. Initialization timeout.'
+      'OrangeHRM UI failed to render the login page after 10 minutes. Initialization timeout.'
     );
   }
 
