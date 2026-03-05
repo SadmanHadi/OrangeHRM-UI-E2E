@@ -66,9 +66,9 @@ export default defineConfig({
     actionTimeout: 60_000,
     /* Maximum time navigation can take. */
     navigationTimeout: 60_000,
-    trace: 'on-first-retry',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    trace: process.env.CI ? 'on' : 'on-first-retry',
+    screenshot: process.env.CI ? 'on' : 'only-on-failure',
+    video: process.env.CI ? 'on' : 'retain-on-failure',
     /* Always run headless (overridable via HEADLESS=false) */
     headless: is_headless,
   },

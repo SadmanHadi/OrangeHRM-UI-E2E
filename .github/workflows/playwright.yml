@@ -109,6 +109,7 @@ jobs:
           name: monocart-report-${{ matrix.project }}
           path: playwright-report/monocart/
           retention-days: 30
+          if-no-files-found: ignore
 
       - name: Upload HTML report
         if: always()
@@ -117,6 +118,7 @@ jobs:
           name: playwright-html-report-${{ matrix.project }}
           path: playwright-report/html/
           retention-days: 30
+          if-no-files-found: ignore
 
       - name: Upload test traces
         if: always()
@@ -125,3 +127,4 @@ jobs:
           name: playwright-traces-${{ matrix.project }}
           path: test-results/
           retention-days: 30
+          if-no-files-found: ignore
