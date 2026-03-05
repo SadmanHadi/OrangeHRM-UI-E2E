@@ -94,7 +94,7 @@ The project is fully autonomous. Docker management (start/stop) and application 
 
 ---
 
-## � Run via XAMPP (Alternative)
+## Run via XAMPP (Alternative)
 
 If you prefer not to use Docker, you can run the suite against an OrangeHRM instance hosted on **XAMPP**.
 
@@ -120,7 +120,7 @@ If you prefer not to use Docker, you can run the suite against an OrangeHRM inst
 
 ---
 
-## �🚀 Run in CI
+## 🚀 Run in CI
 
 The project uses **GitHub Actions** for continuous integration.
 
