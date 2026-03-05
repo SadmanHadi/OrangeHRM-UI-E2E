@@ -54,26 +54,25 @@ jobs:
           docker compose up -d
           echo "Waiting for OrangeHRM to become available..."
 
-          # Wait for the application to be fully ready
-          for i in $(seq 1 120); do
-            # Check if the service is responding
+          # Wait for the application to be responding (Installer first)
+          for i in $(seq 1 40); do
+            # Check if the service is responding (follow redirects)
             if curl -fsL http://localhost > /dev/null 2>&1; then
-              # Check if the login page is actually rendered (contains username field)
-              if curl -fsL http://localhost | grep -q "Username"; then
-                echo "OrangeHRM is ready!"
-                break
-              else
-                echo "  attempt $i/120 — service responding but login page not ready, sleeping 5s..."
-              fi
+              echo "OrangeHRM service is responding!"
+              break
             else
-              echo "  attempt $i/120 — not ready yet, sleeping 5s..."
+              echo "  attempt $i/40 — not ready yet, sleeping 5s..."
             fi
             sleep 5
           done
 
-          # Final check to ensure service is truly ready
+          # Run automated installation
+          echo "Running automated OrangeHRM installation..."
+          node scripts/install-orangehrm.js
+
+          # Final check to ensure login page is truly ready
           if ! curl -fsL http://localhost | grep -q "Username"; then
-            echo "ERROR: OrangeHRM failed to start within 10 minutes"
+            echo "ERROR: OrangeHRM login page failed to render after installation"
             docker compose logs
             exit 1
           fi
