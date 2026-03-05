@@ -53,13 +53,13 @@ jobs:
         run: |
           docker compose up -d
           echo "Waiting for OrangeHRM to become available..."
-          
+
           # Wait for the application to be fully ready
           for i in $(seq 1 120); do
             # Check if the service is responding
-            if curl -fs http://localhost > /dev/null 2>&1; then
+            if curl -fsL http://localhost > /dev/null 2>&1; then
               # Check if the login page is actually rendered (contains username field)
-              if curl -fs http://localhost| grep -q "Username"; then
+              if curl -fsL http://localhost | grep -q "Username"; then
                 echo "OrangeHRM is ready!"
                 break
               else
@@ -70,9 +70,9 @@ jobs:
             fi
             sleep 5
           done
-          
+
           # Final check to ensure service is truly ready
-          if ! curl -fs http://localhost/orangehrm | grep -q "Username"; then
+          if ! curl -fsL http://localhost | grep -q "Username"; then
             echo "ERROR: OrangeHRM failed to start within 10 minutes"
             docker compose logs
             exit 1
