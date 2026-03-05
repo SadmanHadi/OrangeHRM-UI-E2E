@@ -94,7 +94,33 @@ The project is fully autonomous. Docker management (start/stop) and application 
 
 ---
 
-## 🚀 Run in CI
+## � Run via XAMPP (Alternative)
+
+If you prefer not to use Docker, you can run the suite against an OrangeHRM instance hosted on **XAMPP**.
+
+1. **Host OrangeHRM on XAMPP**:
+   - Download the OrangeHRM source and place it in your XAMPP `htdocs` directory (e.g., `C:\xampp\htdocs\orangehrm`).
+   - Start Apache and MySQL from the XAMPP Control Panel.
+   - Complete the manual installation in your browser (e.g., `http://localhost/orangehrm`).
+
+2. **Configure `.env`**:
+   Update your `BASE_URL` to match your XAMPP path:
+
+   ```bash
+   BASE_URL=http://localhost/orangehrm
+   ADMIN_USERNAME=admin
+   ADMIN_PASSWORD=your_password
+   ```
+
+3. **Run Tests**:
+   ```bash
+   pnpm test
+   ```
+   _Note: You can safely ignore the `docker compose up` logs; the suite will automatically fall back to health-checking your XAMPP instance._
+
+---
+
+## �🚀 Run in CI
 
 The project uses **GitHub Actions** for continuous integration.
 
