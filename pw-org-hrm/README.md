@@ -29,12 +29,12 @@ End-to-End UI test automation for **OrangeHRM**, built with **Playwright + TypeS
 - **Page Object Model (POM):** `src/pages/` — one class per OrangeHRM module
 - **Setup Functions Pattern:**
   - `globalSetup` — server health-check + one-time admin login (saves session via `storageState`)
-  - `src/setup/auth.setup.ts` — reusable login helper
+  - `src/setup/*.setup.ts` — reusable state preparation (Employee, Claim, etc.)
   - `src/utils/timestamp.ts` — unique name generator (`uniqueName()`)
 - **Atomic Testing:** every test creates and cleans up its own data
-- **Parallel-Safe:** all entities use a `Date.now()` timestamp suffix to avoid name collisions
+- **Parallel-Safe:** all entities use a custom timestamp + random hash suffix to avoid collisions
 - **Multi-Browser:** tests run on Chromium, Firefox, WebKit, and Edge (4 browsers)
-- **Reporting:** Monocart HTML reporter + Playwright trace on failure
+- **Modern Standards:** ESLint Flat Config (v10) + Prettier + Strict TypeScript
 
 ---
 
@@ -44,100 +44,28 @@ End-to-End UI test automation for **OrangeHRM**, built with **Playwright + TypeS
 | ------------- | ------------------------------- |
 | **Node.js**   | v18+                            |
 | **Docker**    | Latest (for CI / Docker local)  |
-| **XAMPP**     | Optional (for XAMPP local)      |
 | **OrangeHRM** | Installed locally or via Docker |
 
 ---
 
-## Installation
+## 🔐 Secret Management (Local vs CI)
 
-```bash
-git clone <repository-url>
-cd orangehrm-playwright
-npm install
-npx playwright install --with-deps
-```
+The project uses a secure, dual-layer environment management system:
 
----
+### 🏠 Local Development
 
-## Environment Setup
+1. **File**: `.env` (Ignored by Git for security)
+2. **Setup**: Copy `.env.example` to `.env`.
+3. **Usage**: `dotenv` automatically loads these into `process.env`.
 
-Copy the example env and fill in your values:
+### 🚀 CI (GitHub Actions)
 
-```bash
-cp .env.example .env
-```
-
-| Variable         | Description                                       | Example                      |
-| ---------------- | ------------------------------------------------- | ---------------------------- |
-| `BASE_URL`       | OrangeHRM root URL (**without** `/web/index.php`) | `http://localhost/orangehrm` |
-| `ADMIN_USERNAME` | Admin login username                              | `admin`                      |
-| `ADMIN_PASSWORD` | Admin login password                              | `Admin@1234`                 |
-
----
-
-## Run Locally
-
-### Option A: With XAMPP (manual server)
-
-1. Start XAMPP → run **Apache** and **MySQL**
-2. Ensure OrangeHRM is accessible at your `BASE_URL`
-3. Run tests:
-
-```bash
-# All browsers (sequential locally)
-npx playwright test
-
-# Single browser
-npx playwright test --project=chromium
-
-# Interactive UI mode
-npx playwright test --ui
-```
-
-### Option B: With Docker Compose
-
-```bash
-# Start OrangeHRM server
-docker compose up -d
-
-# Wait for it to initialize (~2 min on first run), then:
-npx playwright test
-
-# Stop server when done
-docker compose down
-```
-
----
-
-## Run in CI (GitHub Actions)
-
-The pipeline (`.github/workflows/playwright.yml`) **automatically**:
-
-1. Installs dependencies + Playwright browsers.
-2. Starts OrangeHRM via `docker compose up -d`.
-3. Waits for the server to be healthy.
-4. Executes tests in **Parallel via CI Matrix Strategy** (Chromium, Firefox, WebKit, Edge).
-5. Isolates each browser into its own VM for 100% execution stability.
-6. Uploads **Monocart reports + Playwright traces** as version-controlled artifacts.
-
-**No manual setup required** — the CI pipeline is fully self-contained and production-ready.
-
----
-
-## Reports & Artifacts
-
-| Report                        | Location                                                 |
-| ----------------------------- | -------------------------------------------------------- |
-| **Monocart HTML** (local)     | `monocart-report/index.html`                             |
-| **Playwright traces** (local) | `test-results/`                                          |
-| **CI artifacts**              | Download from GitHub Actions → run → "Artifacts" section |
-
-To view a trace locally:
-
-```bash
-npx playwright show-trace test-results/<test-name>/trace.zip
-```
+1. **Mechanism**: GitHub Actions **Secrets**.
+2. **Setup**: Go to `Settings > Secrets and variables > Actions` and add:
+   - `BASE_URL`: Root URL of your instance.
+   - `ADMIN_USERNAME`: Admin User.
+   - `ADMIN_PASSWORD`: Admin Password.
+3. **Internal Logic**: The `playwright.yml` workflow dynamically creates an ephemeral `.env` from these secrets during the run.
 
 ---
 
@@ -146,37 +74,26 @@ npx playwright show-trace test-results/<test-name>/trace.zip
 ```text
 orangehrm-playwright/
 ├── .github/workflows/
-│   └── playwright.yml      ← CI/CD pipeline
+│   └── playwright.yml      ← CI/CD pipeline (Matrix Strategy)
 ├── artifacts/
-│   └── auth/               ← Auth session storage
+│   └── auth/               ← Auth session storage (storageState.json)
 ├── src/
 │   ├── pages/              ← Page Object Model classes
-│   │   ├── ClaimPage.ts
-│   │   ├── EmployeePage.ts
-│   │   ├── EventPage.ts
-│   │   └── LeaveTypePage.ts
-│   ├── setup/              ← Setup & Cleanup helpers
-│   │   ├── auth.setup.ts
-│   │   ├── claim.setup.ts
-│   │   ├── employee.setup.ts
-│   │   ├── event.setup.ts
-│   │   └── leave-type.setup.ts
-│   └── utils/              ← Shared utilities
-│       └── timestamp.ts
-├── tests/                  ← CRUD & Bonus test specs
-│   ├── Bonus Test cases/   ← Advanced automation tasks
-│   ├── claim/
-│   ├── employee/
-│   ├── event/
-│   └── leave-type/
-├── .eslintrc.json          ← Linting configuration
+│   ├── setup/              ← Preparation helpers (Employee, Claim, etc.)
+│   └── utils/              ← Shared utilities (timestamps, unique IDs)
+├── tests/
+│   ├── advanced/           ← Advanced tasks (Loop, Dynamic ID)
+│   ├── claim/              ← Claim module CRUD
+│   ├── employee/           ← Employee module CRUD (Production Hardened)
+│   ├── event/              ← Event module CRUD
+│   └── leave-type/         ← Leave Type module CRUD
+├── eslint.config.mjs       ← Modern ESLint Flat Config
 ├── .prettierrc             ← Formatting configuration
 ├── docker-compose.yml      ← Container orchestration
-├── global-setup.ts         ← Server health-check + auth
-├── global-teardown.ts      ← Post-run cleanup
-├── playwright.config.ts    ← Playwright configuration
-├── package.json            ← Dependencies & Scripts
-└── tsconfig.json           ← TypeScript configuration
+├── global-setup.ts         ← Server health-check + Auth preparation
+├── playwright.config.ts    ← Playwright engine configuration
+├── package.json            ← Scripts & dependencies
+└── tsconfig.json           ← TypeScript strict mode config
 ```
 
 ---
