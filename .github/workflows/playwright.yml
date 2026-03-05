@@ -2,9 +2,9 @@ name: OrangeHRM E2E Tests
 
 on:
   push:
-    branches: ['9.10.cicd']
+    branches: ['main']
   pull_request:
-    branches: ['9.10.cicd']
+    branches: ['main']
   workflow_dispatch: {}
 
 jobs:
@@ -36,7 +36,10 @@ jobs:
 
       # ── Playwright browsers ─────────────────────────────────────────────────
       - name: Install Playwright browsers
-        run: pnpm exec playwright install chromium ${{ matrix.project }} --with-deps
+        run: |
+          BROWSER="${{ matrix.project }}"
+          if [ "$BROWSER" = "edge" ]; then BROWSER="msedge"; fi
+          pnpm exec playwright install chromium $BROWSER --with-deps
 
       # ── Start OrangeHRM via Docker Compose ─────────────────────────────────
       - name: Start OrangeHRM (Docker)
@@ -44,13 +47,16 @@ jobs:
           docker compose up -d
           echo "Waiting for OrangeHRM to become available..."
           for i in $(seq 1 60); do
-            if curl -fs http://localhost > /dev/null 2>&1; then
+            if curl -fs http://localhost > /dev/null 2>&1 && curl -fs http://localhost/web/index.php/auth/login > /dev/null 2>&1; then
               echo "OrangeHRM is ready!"
-              break
+              exit 0
             fi
             echo "  attempt $i/60 — not ready yet, sleeping 10s..."
             sleep 10
           done
+          echo "OrangeHRM failed to start within 10 minutes."
+          docker compose logs
+          exit 1
 
       # ── Write .env for the test run ─────────────────────────────────────────
       - name: Create .env
