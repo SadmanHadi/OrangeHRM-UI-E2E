@@ -57,9 +57,9 @@ jobs:
           # Wait for the application to be fully ready
           for i in $(seq 1 120); do
             # Check if the service is responding
-            if curl -fs http://localhost/orangehrm > /dev/null 2>&1; then
+            if curl -fs http://localhost > /dev/null 2>&1; then
               # Check if the login page is actually rendered (contains username field)
-              if curl -fs http://localhost/orangehrm | grep -q "Username"; then
+              if curl -fs http://localhost| grep -q "Username"; then
                 echo "OrangeHRM is ready!"
                 break
               else
