@@ -43,6 +43,7 @@ End-to-End UI test automation for **OrangeHRM**, built with **Playwright + TypeS
 | Requirement   | Version                         |
 | ------------- | ------------------------------- |
 | **Node.js**   | v18+                            |
+| **pnpm**      | v9+                             |
 | **Docker**    | Latest (for CI / Docker local)  |
 | **OrangeHRM** | Installed locally or via Docker |
 
@@ -100,10 +101,9 @@ The project uses a secure, dual-layer environment management system:
 
 ## Available Scripts
 
-| Script        | Command           |
-| ------------- | ----------------- |
-| Run all tests | `npm test`        |
-| Run with UI   | `npm run test:ui` |
+| Install deps | `pnpm install` |
+| Run all tests | `pnpm test` |
+| Run with UI | `pnpm test:ui` |
 
 ---
 
