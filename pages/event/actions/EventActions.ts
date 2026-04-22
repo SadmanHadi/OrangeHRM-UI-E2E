@@ -14,7 +14,7 @@ export class EventActions extends BasePage {
 
     public async navigate(): Promise<void> {
         await this.page.goto(
-            `${process.env.BASE_URL}/web/index.php/claim/viewAssignClaim`,
+            `${process.env.BASE_URL}${EventLocators.eventListUrl}`,
             { waitUntil: "domcontentloaded" },
         );
         await this.page

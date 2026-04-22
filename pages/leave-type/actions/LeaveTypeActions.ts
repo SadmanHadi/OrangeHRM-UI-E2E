@@ -14,13 +14,12 @@ export class LeaveTypeActions extends BasePage {
 
     public async navigate(): Promise<void> {
         await this.page.goto(
-            `${process.env.BASE_URL}/web/index.php/leave/leaveTypeList`,
+            `${process.env.BASE_URL}${LeaveTypeLocators.leaveTypeListUrl}`,
             { waitUntil: "domcontentloaded" },
         );
         await this.page
-            .locator(".oxd-table-body, .oxd-button--secondary")
-            .first()
-            .waitFor({ state: "visible", timeout: 15000 });
+            .getByRole("button", { name: LeaveTypeLocators.addButton })
+            .waitFor({ state: "visible", timeout: 30000 });
     }
 
     async create(name: string): Promise<void> {
@@ -32,7 +31,7 @@ export class LeaveTypeActions extends BasePage {
             .locator(".oxd-form")
             .waitFor({ state: "visible", timeout: 10000 });
 
-        const formInput = getInputByLabel(this.page, { labelText: /^Name$/ });
+        const formInput = getInputByLabel(this.page, { labelText: LeaveTypeLocators.leaveTypeNameLabel });
         await formInput.waitFor({ state: "visible", timeout: 5000 });
         await formInput.click();
         await formInput.fill(name);
@@ -78,7 +77,7 @@ export class LeaveTypeActions extends BasePage {
             .locator(".oxd-form")
             .waitFor({ state: "visible", timeout: 10000 });
 
-        const formInput = getInputByLabel(this.page, { labelText: /^Name$/ });
+        const formInput = getInputByLabel(this.page, { labelText: LeaveTypeLocators.leaveTypeNameLabel });
         await formInput.waitFor({ state: "visible", timeout: 5000 });
         await formInput.click();
         await formInput.press("Control+a");

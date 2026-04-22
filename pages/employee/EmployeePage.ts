@@ -1,7 +1,7 @@
+import { EmployeeActions } from "./actions/EmployeeActions";
+
 /**
- * Employee Page — re-exports EmployeeActions for use in tests.
- * Actions are separated into src/pages/employee/actions/EmployeeActions.ts
- * Locators are separated into src/pages/employee/locators/EmployeeLocators.ts
+ * EmployeePage keeps page-object import stable while action logic stays modular.
  */
-export { EmployeeActions as EmployeePage } from "./actions/EmployeeActions";
+export class EmployeePage extends EmployeeActions {}
 export { EmployeeLocators } from "./locators/EmployeeLocators";

@@ -10,7 +10,7 @@ export class BasePage {
 
     protected async gotoAndWait(url: string): Promise<void> {
         await this.page.goto(url, {
-            waitUntil: "domcontentloaded",
+            waitUntil: "load",
             timeout: 30000,
         });
         await this.waitForLayout();

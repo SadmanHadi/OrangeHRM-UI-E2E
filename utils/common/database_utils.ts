@@ -1,4 +1,5 @@
 import { execSync } from "child_process";
+import { requireEnv } from "../env";
 
 /**
  * Database utilities for the OrangeHRM E2E framework.
@@ -10,11 +11,10 @@ export class DatabaseUtils {
      * Executes a SQL command inside the orangehrm_db container.
      */
     static executeSql(sql: string): void {
-        // Use container name from docker-compose or fallback to default
         const containerName = "orangehrm_db";
         const user = "root";
-        const password = process.env.DB_ROOT_PASSWORD || "Root123";
-        const dbName = process.env.DB_NAME || "orangehrm";
+        const password = requireEnv("DB_ROOT_PASSWORD");
+        const dbName = requireEnv("DB_NAME");
 
         // Construct the docker exec command
         // Note: Using -p without space is required for mysql CLI

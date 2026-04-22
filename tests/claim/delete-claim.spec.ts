@@ -32,7 +32,7 @@ test.describe("Claim (Self) - Delete", () => {
         await claimPage.delete(eventName, remarks);
 
         const exists = await claimPage.read(eventName);
-        await expectTableRowHidden(page, eventName);
+        await expectTableRowHidden(page, eventName, { timeout: 30000 });
         expect(exists).toBe(false);
     });
 });

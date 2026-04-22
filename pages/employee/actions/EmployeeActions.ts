@@ -15,7 +15,7 @@ export class EmployeeActions extends BasePage {
     async navigate(): Promise<void> {
         await this.page.goto(
             `${process.env.BASE_URL}${EmployeeLocators.employeeListUrl}`,
-            { waitUntil: "domcontentloaded" },
+            { waitUntil: "load" },
         );
         await this.waitForSpinner();
     }
@@ -58,6 +58,7 @@ export class EmployeeActions extends BasePage {
     async create(firstName: string, lastName: string): Promise<string> {
         await this.page.goto(
             `${process.env.BASE_URL}${EmployeeLocators.addEmployeeUrl}`,
+            { waitUntil: "load" },
         );
         const firstNameInput = this.page.locator(
             EmployeeLocators.firstNameInput,

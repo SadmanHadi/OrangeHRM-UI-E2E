@@ -1,20 +1,20 @@
 /* eslint-disable playwright/no-raw-locators, playwright/no-wait-for-timeout, playwright/no-wait-for-selector, playwright/require-hook */
 import { chromium } from "@playwright/test";
 import { execSync } from "child_process";
-import * as dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
+import { loadProjectEnv, requireEnv } from "../utils/env";
 
 async function install() {
-    dotenv.config({ path: path.resolve(__dirname, "..", "configs", ".env") });
+    loadProjectEnv();
 
-    const baseURL = process.env.BASE_URL || "http://localhost";
-    const dbHost = process.env.DB_HOST || "ohrm-db";
-    const dbName = process.env.DB_NAME || "orangehrm";
+    const baseURL = requireEnv("BASE_URL");
+    const dbHost = requireEnv("DB_HOST");
+    const dbName = requireEnv("DB_NAME");
     // const dbUser = "root"; // Unused in this script
-    const dbPass = process.env.DB_ROOT_PASSWORD || "Root123";
-    const adminUser = process.env.ADMIN_USERNAME || "admin";
-    const adminPass = process.env.ADMIN_PASSWORD || "Admin@123456#";
+    const dbPass = requireEnv("DB_ROOT_PASSWORD");
+    const adminUser = requireEnv("ADMIN_USERNAME");
+    const adminPass = requireEnv("ADMIN_PASSWORD");
 
     console.log(`[ui-installer] Starting installation at ${baseURL}...`);
 
@@ -23,7 +23,7 @@ async function install() {
             console.log(
                 `[ui-installer] Dropping database ${dbName} for clean install...`,
             );
-            const rootPass = process.env.DB_ROOT_PASSWORD || "Root123";
+            const rootPass = requireEnv("DB_ROOT_PASSWORD");
             execSync(
                 `docker compose exec -T ohrm-db mariadb -h 127.0.0.1 -u root -p${rootPass} -e "DROP DATABASE IF EXISTS ${dbName};"`,
                 { stdio: "inherit" },
@@ -36,8 +36,22 @@ async function install() {
         }
     };
 
+    const restartOrangeHRMApp = () => {
+        try {
+            console.log(
+                "[ui-installer] Restarting OrangeHRM app after database reset...",
+            );
+            execSync("docker compose restart orangehrm", { stdio: "inherit" });
+        } catch (error: any) {
+            console.warn(
+                `[ui-installer] Warning: Failed to restart OrangeHRM app: ${error.message}`,
+            );
+        }
+    };
+
     // Wipe DB before starting browser to ensure we always get a fresh install UI
     wipeDatabase();
+    restartOrangeHRMApp();
 
     const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
@@ -100,10 +114,40 @@ async function install() {
             return false;
         };
 
-        await page.goto(`${baseURL}/installer/index.php/welcome`, {
-            waitUntil: "domcontentloaded",
-            timeout: 60000,
-        });
+        const waitForInstallerWelcome = async (maxTries = 12) => {
+            for (let i = 0; i < maxTries; i++) {
+                try {
+                    await page.goto(`${baseURL}/installer/index.php/welcome`, {
+                        waitUntil: "domcontentloaded",
+                        timeout: 60000,
+                    });
+                } catch (error) {
+                    console.log(
+                        `[ui-installer] Installer welcome not reachable yet (${(error as Error).message}). Retrying (${i + 1}/${maxTries})...`,
+                    );
+                    await page.waitForTimeout(5000);
+                    continue;
+                }
+
+                const bodyText = (
+                    await page.locator("body").innerText()
+                ).trim();
+                if (bodyText.length > 0) {
+                    return;
+                }
+
+                console.log(
+                    `[ui-installer] Installer welcome still blank. Retrying (${i + 1}/${maxTries})...`,
+                );
+                await page.waitForTimeout(5000);
+            }
+
+            throw new Error(
+                "Installer welcome page remained blank after database reset.",
+            );
+        };
+
+        await waitForInstallerWelcome();
 
         // Step 2: Welcome -> License
         await clickNextIfVisible();

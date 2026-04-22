@@ -1,15 +1,24 @@
 /* eslint-disable playwright/no-raw-locators, playwright/no-wait-for-selector */
-import { chromium, FullConfig } from "@playwright/test";
+import { chromium, FullConfig, Page } from "@playwright/test";
 import { execSync } from "child_process";
-import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import { startOrangeHRM } from "../scripts/start-orangehrm";
+import { loadProjectEnv, requireEnv } from "../utils/env";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function waitForContainersReady(retries = 30) {
-    const rootPass = process.env.DB_ROOT_PASSWORD || "Root123";
+function getDbRootPassword(): string {
+    return requireEnv("DB_ROOT_PASSWORD");
+}
+
+function getDbName(): string {
+    return requireEnv("DB_NAME");
+}
+
+async function waitForContainersReady(retries = 30): Promise<boolean> {
+    const rootPass = getDbRootPassword();
+
     for (let i = 0; i < retries; i++) {
         try {
             const status = execSync(
@@ -18,12 +27,12 @@ async function waitForContainersReady(retries = 30) {
             console.log(
                 `[global-setup] Waiting for Docker services... ${status.trim().replace(/\n/g, ", ")}`,
             );
+
             const lowerStatus = status.toLowerCase();
             if (
                 lowerStatus.includes("ohrm-db") &&
                 lowerStatus.includes("healthy")
             ) {
-                // Double check that we can actually connect with root password
                 try {
                     execSync(
                         `docker compose exec -T ohrm-db mariadb-admin ping -h 127.0.0.1 -u root -p${rootPass}`,
@@ -35,26 +44,24 @@ async function waitForContainersReady(retries = 30) {
                     return true;
                 } catch {
                     console.log(
-                        "[global-setup] MariaDB is healthy but not yet accepting connections (waiting for init)...",
+                        "[global-setup] MariaDB healthy but not accepting connections yet.",
                     );
                 }
             }
         } catch {
-            // ignore
+            // ignore transient docker compose output failures
         }
+
         await sleep(5000);
     }
+
     return false;
 }
 
-/**
- * Checks if the database has the expected OrangeHRM tables
- */
 function isDatabaseSchemaReady(): boolean {
     try {
-        const rootPass = process.env.DB_ROOT_PASSWORD || "Root123";
-        const dbName = process.env.DB_NAME || "orangehrm";
-        // Check for a core table that indicates the installer has completed successfully
+        const rootPass = getDbRootPassword();
+        const dbName = getDbName();
         const result = execSync(
             `docker compose exec -T ohrm-db mariadb -h 127.0.0.1 -u root -p${rootPass} -e "USE ${dbName}; SHOW TABLES LIKE 'ohrm_user';"`,
             { stdio: "pipe" },
@@ -65,104 +72,92 @@ function isDatabaseSchemaReady(): boolean {
     }
 }
 
-async function _ensureConfFileInContainer(
-    dbHost: string = process.env.DB_HOST || "ohrm-db",
-    dbPort: string = process.env.DB_PORT || "3306",
-    dbName: string = process.env.DB_NAME || "orangehrm",
-    dbUser: string = process.env.DB_USER || "orangehrm",
-    dbPass: string = process.env.DB_PASSWORD || "Orange123",
-) {
-    const buildConfContent = (
-        host: string,
-        port: string,
-        name: string,
-        user: string,
-        pass: string,
-    ) => {
-        // Guard against 'undefined' string injection
-        const h = host && host !== "undefined" ? host : "ohrm-db";
-        const p = port && port !== "undefined" ? port : "3306";
-        const n = name && name !== "undefined" ? name : "orangehrm";
-        const u = user && user !== "undefined" ? user : "orangehrm";
-        const pw = pass && pass !== "undefined" ? pass : "Orange123";
-
-        return `<?php
-class Conf {
-    private string $dbHost = '${h}';
-    private string $dbPort = '${p}';
-    private string $dbName = '${n}';
-    private string $dbUser = '${u}';
-    private string $dbPass = '${pw}';
-
-    public function __construct() {}
-    public function getDbHost(): string { return $this->dbHost; }
-    public function getDbPort(): string { return $this->dbPort; }
-    public function getDbName(): string { return $this->dbName; }
-    public function getDbUser(): string { return $this->dbUser; }
-    public function getDbPass(): string { return $this->dbPass; }
-}
-`;
-    };
-
-    const confContent = buildConfContent(
-        dbHost,
-        dbPort,
-        dbName,
-        dbUser,
-        dbPass,
-    );
-    console.log(
-        `[global-setup] Injecting Conf.php with host=${dbHost}, user=${dbUser}`,
-    );
-    const tempDir = path.resolve(process.cwd(), "scripts", "artifacts");
-    if (!fs.existsSync(tempDir)) {
-        fs.mkdirSync(tempDir, { recursive: true });
-    }
-    const tempFilePath = path.resolve(tempDir, "Conf.php.tmp");
-    fs.writeFileSync(tempFilePath, confContent, "utf8");
-
+function isAppConfigured(): boolean {
     try {
         execSync(
-            "docker compose exec -T orangehrm mkdir -p /var/www/html/lib/confs",
+            "docker compose exec -T orangehrm ls /var/www/html/lib/confs/Conf.php",
             { stdio: "ignore" },
         );
-        execSync(
-            `docker compose cp "${tempFilePath}" orangehrm:/var/www/html/lib/confs/Conf.php`,
-            { stdio: "pipe" },
-        );
-        await sleep(1000);
-        const result = execSync(
-            "docker compose exec -T orangehrm test -s /var/www/html/lib/confs/Conf.php && echo 'exists'",
-            { stdio: "pipe" },
-        ).toString();
-        if (!result.includes("exists")) {
-            throw new Error("Conf.php was copied but verification failed");
-        }
-        console.log(
-            "[global-setup] ✓ Conf.php verified (file exists and is not empty)",
-        );
-    } catch (error) {
-        console.error(
-            `[global-setup] ✗ Failed to ensure Conf.php: ${(error as Error).message}`,
-        );
-        throw error;
+        return true;
+    } catch {
+        return false;
     }
 }
 
-async function globalSetup(config: FullConfig) {
-    // Load root .env first (CI writes here), then configs/.env overrides for local dev
-    dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
-    dotenv.config({ path: path.resolve(__dirname, ".env"), override: true });
+async function waitForHttpReady(
+    baseURL: string,
+    retries = 36,
+    isReady: (status: number) => boolean = (status) =>
+        status >= 200 && status < 600,
+): Promise<void> {
+    const loginUrl = new URL("/web/index.php/auth/login", baseURL).toString();
 
-    const baseURL =
-        process.env.BASE_URL ||
-        config.projects[0].use.baseURL ||
-        "http://localhost";
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(loginUrl, {
+                method: "GET",
+                redirect: "manual",
+            });
+
+            if (isReady(response.status)) {
+                console.log(
+                    `[global-setup] ✓ OrangeHRM web app responding at ${loginUrl} (${response.status}).`,
+                );
+                return;
+            }
+
+            console.log(
+                `[global-setup] Waiting for web app... attempt ${i + 1}/${retries} (status: ${response.status})`,
+            );
+        } catch (error) {
+            console.log(
+                `[global-setup] Waiting for web app... attempt ${i + 1}/${retries} (error: ${(error as Error).message})`,
+            );
+        }
+
+        await sleep(5000);
+    }
+
+    throw new Error(
+        `[global-setup] OrangeHRM web app did not become reachable at ${loginUrl}.`,
+    );
+}
+
+async function gotoLoginAndWaitForForm(
+    page: Page,
+    baseURL: string,
+): Promise<void> {
+    await page.goto(`${baseURL}/web/index.php/auth/login`, {
+        waitUntil: "domcontentloaded",
+        timeout: 60000,
+    });
+    await page.waitForSelector('input[name="username"]', {
+        timeout: 30000,
+    });
+}
+
+async function globalSetup(config: FullConfig): Promise<void> {
+    loadProjectEnv();
+
+    const baseURL = process.env.BASE_URL || config.projects[0].use.baseURL;
+    if (typeof baseURL !== "string" || !baseURL.trim()) {
+        throw new Error(
+            "[global-setup] BASE_URL is required. Copy .env.example and provide a real value.",
+        );
+    }
+
+    const username = requireEnv("ADMIN_USERNAME");
+    const password = requireEnv("ADMIN_PASSWORD");
+    requireEnv("DB_ROOT_PASSWORD");
+    requireEnv("DB_NAME");
+    requireEnv("DB_USER");
+    requireEnv("DB_PASSWORD");
+    requireEnv("DB_HOST");
+    requireEnv("DB_PORT");
+
     const { storageState } = config.projects[0].use;
-    const AUTH_FILE =
+    const authFile =
         typeof storageState === "string" ? storageState : "storageState.json";
-    const username = process.env.ADMIN_USERNAME || "admin";
-    const password = process.env.ADMIN_PASSWORD || "Admin@123456#";
 
     console.log(
         `[global-setup] Env { BASE_URL: ${baseURL}, ADMIN_USERNAME: ${username ? "set" : "missing"} }`,
@@ -178,19 +173,18 @@ async function globalSetup(config: FullConfig) {
         }).toString();
         if (
             psOutput.includes("orangehrm_app") &&
-            psOutput.includes("running")
+            psOutput.toLowerCase().includes("running")
         ) {
-            console.log(
-                "[global-setup] OrangeHRM is already running, checking health...",
-            );
-            const ready = await waitForContainersReady(5); // Quick check
+            const ready = await waitForContainersReady(5);
             if (ready) {
                 needsStart = false;
-                console.log("[global-setup] OrangeHRM is already healthy.");
+                console.log(
+                    "[global-setup] OrangeHRM containers already healthy.",
+                );
             }
         }
     } catch {
-        // proceed to start
+        // proceed with fresh start
     }
 
     if (needsStart) {
@@ -198,98 +192,95 @@ async function globalSetup(config: FullConfig) {
         const ready = await waitForContainersReady(36);
         if (!ready) {
             throw new Error(
-                "[global-setup] Docker services failed to reach Healthy state.",
+                "[global-setup] Docker services failed to reach healthy state.",
             );
         }
     }
 
-    fs.mkdirSync(path.dirname(AUTH_FILE), { recursive: true });
+    const schemaReady = isDatabaseSchemaReady();
+    const appConfigured = isAppConfigured();
+    const fullyReady = schemaReady && appConfigured;
+
+    if (fullyReady) {
+        await waitForHttpReady(
+            baseURL,
+            60,
+            (status) => status >= 200 && status < 400,
+        );
+    } else {
+        // If not configured, we expect 500 or redirect to installer
+        await waitForHttpReady(baseURL);
+    }
+
+    fs.mkdirSync(path.dirname(authFile), { recursive: true });
 
     const browser = await chromium.launch();
     const page = await browser.newPage();
 
     try {
-        await page.goto(baseURL!, {
-            waitUntil: "domcontentloaded",
-            timeout: 30000,
-        });
-        const content = await page.content();
-        const schemaReady = isDatabaseSchemaReady();
-
-        if (content.includes("orangehrm-installer") || !schemaReady) {
+        if (!fullyReady) {
             console.log(
-                "[global-setup] Running OrangeHRM REST API installer...",
+                `[global-setup] Running OrangeHRM installer (schemaReady: ${schemaReady}, appConfigured: ${appConfigured})...`,
             );
-            try {
-                execSync("pnpm exec tsx scripts/ui-installer.ts", {
-                    stdio: "inherit",
-                });
-                console.log(
-                    "[global-setup] ✓ Installer completed successfully.",
-                );
-            } catch (error) {
-                console.error(
-                    "[global-setup] ✗ Installer failed:",
-                    (error as Error).message,
-                );
-                throw new Error("[global-setup] Automated installer failed.");
-            }
-            console.log(
-                "[global-setup] Installer done, navigating to login...",
+            execSync("pnpm exec tsx scripts/ui-installer.ts", {
+                stdio: "inherit",
+            });
+            await waitForHttpReady(
+                baseURL,
+                60,
+                (status) => status >= 200 && status < 400,
             );
         }
 
-        // Normal login flow
         console.log("[global-setup] Logging in...");
-        await page.goto(`${baseURL}/web/index.php/auth/login`, {
-            timeout: 60000,
-        });
-        await page.waitForSelector('input[name="username"]', {
-            timeout: 30000,
-        });
+        try {
+            await gotoLoginAndWaitForForm(page, baseURL);
+        } catch {
+            console.log(
+                "[global-setup] Login form unavailable. Re-running installer once and retrying...",
+            );
+            execSync("pnpm exec tsx scripts/ui-installer.ts", {
+                stdio: "inherit",
+            });
+            await waitForHttpReady(baseURL, 60);
+            await gotoLoginAndWaitForForm(page, baseURL);
+        }
+
         await page.locator('input[name="username"]').fill(username);
         await page.locator('input[name="password"]').fill(password);
         await page.locator('button[type="submit"]').click();
 
-        // Wait for dashboard or error
         await Promise.race([
             page.waitForURL(/dashboard/, { timeout: 15000 }),
             page.waitForSelector(".oxd-alert-content-text", { timeout: 15000 }),
         ]);
 
-        if (page.url().includes("dashboard")) {
-            await page.context().storageState({ path: AUTH_FILE });
-            console.log("[global-setup] ✓ Admin login verified.");
-        } else {
+        if (!page.url().includes("dashboard")) {
             const errorText = await page
                 .locator(".oxd-alert-content-text")
                 .innerText()
                 .catch(() => "Unknown error");
-            console.warn(
-                `[global-setup] Login failed with error: ${errorText}`,
-            );
-            await page.screenshot({
-                path: path.resolve(
-                    __dirname,
-                    "..",
-                    "artifacts",
-                    "login-failed.png",
-                ),
-            });
             throw new Error(`Login failed with error: ${errorText}`);
         }
+
+        await page.context().storageState({ path: authFile });
+        console.log("[global-setup] ✓ Admin login verified.");
     } catch (error) {
-        console.error(
-            "[global-setup] ✗ Setup failed:",
-            (error as Error).message,
-        );
+        await page.screenshot({
+            path: path.resolve(
+                __dirname,
+                "..",
+                "artifacts",
+                "login-failed.png",
+            ),
+        });
         throw error;
+    } finally {
+        await browser.close();
     }
 
-    await page.context().storageState({ path: AUTH_FILE });
-    await browser.close();
     console.log(
-        `[global-setup] ✓ Global setup complete. Auth state saved to ${AUTH_FILE}`,
+        `[global-setup] ✓ Global setup complete. Auth state saved to ${authFile}`,
     );
 }
 

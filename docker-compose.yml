@@ -15,8 +15,8 @@ services:
             - "--sync-binlog=0"
             - "--innodb-use-native-aio=0"
         environment:
-            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-Root123}
-            MYSQL_DATABASE: ${DB_NAME:-orangehrm}
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${DB_NAME}
         volumes:
             - mariadb_data:/var/lib/mysql
         healthcheck:
@@ -29,7 +29,7 @@ services:
                     "127.0.0.1",
                     "-u",
                     "root",
-                    "--password=${DB_ROOT_PASSWORD:-Root123}",
+                    "--password=${DB_ROOT_PASSWORD}",
                 ]
             interval: 10s
             timeout: 5s
@@ -51,9 +51,9 @@ services:
         environment:
             ORANGEHRM_DATABASE_HOST: ohrm-db
             ORANGEHRM_DATABASE_PORT: "3306"
-            ORANGEHRM_DATABASE_NAME: ${DB_NAME:-orangehrm}
-            ORANGEHRM_DATABASE_USER: ${DB_USER:-orangehrm}
-            ORANGEHRM_DATABASE_PASSWORD: ${DB_PASSWORD:-Orange123}
+            ORANGEHRM_DATABASE_NAME: ${DB_NAME}
+            ORANGEHRM_DATABASE_USER: ${DB_USER}
+            ORANGEHRM_DATABASE_PASSWORD: ${DB_PASSWORD}
         depends_on:
             ohrm-db:
                 condition: service_healthy
@@ -63,6 +63,8 @@ services:
                     memory: 1G
         networks:
             - ohrm-net
+        volumes:
+            - orangehrm_data:/var/www/html/lib/confs
 
 volumes:
     mariadb_data:

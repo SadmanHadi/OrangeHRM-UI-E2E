@@ -3,11 +3,11 @@
  */
 export const LeaveTypeLocators = {
     // Navigation
-    leaveTypeUrl: "/web/index.php/leave/viewLeaveTypeList",
+    leaveTypeListUrl: "/web/index.php/leave/leaveTypeList",
     addLeaveTypeUrl: "/web/index.php/leave/saveLeaveType",
 
     // Form
-    leaveTypeNameLabel: "Leave Type",
+    leaveTypeNameLabel: /^Name$/,
     addButton: "Add",
     saveButton: "Save",
     searchButton: "Search",

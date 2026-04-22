@@ -6,73 +6,64 @@
     {
       "label": "eslint.config.mjs",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\eslint.config.mjs",
+      "source_file": "eslint.config.mjs",
       "source_location": "L1",
-      "id": "e_projects_agt_orangehrm_ui_e2e_eslint_config_mjs",
-      "community": 18,
+      "id": "eslint_config_mjs",
+      "community": 17,
       "norm_label": "eslint.config.mjs"
     },
     {
       "label": "global-setup.ts",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
+      "source_file": "configs\\global-setup.ts",
       "source_location": "L1",
-      "id": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
-      "community": 2,
+      "id": "configs_global_setup_ts",
+      "community": 5,
       "norm_label": "global-setup.ts"
     },
     {
       "label": "sleep()",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L10",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L9",
       "id": "global_setup_sleep",
-      "community": 2,
+      "community": 5,
       "norm_label": "sleep()"
     },
     {
       "label": "waitForContainersReady()",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L12",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L11",
       "id": "global_setup_waitforcontainersready",
-      "community": 2,
+      "community": 5,
       "norm_label": "waitforcontainersready()"
     },
     {
       "label": "isDatabaseSchemaReady()",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L54",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L53",
       "id": "global_setup_isdatabaseschemaready",
-      "community": 2,
+      "community": 5,
       "norm_label": "isdatabaseschemaready()"
     },
     {
       "label": "_ensureConfFileInContainer()",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L69",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L68",
       "id": "global_setup_ensureconffileincontainer",
-      "community": 2,
+      "community": 5,
       "norm_label": "_ensureconffileincontainer()"
-    },
-    {
-      "label": "waitForLoginRouteReady()",
-      "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L153",
-      "id": "global_setup_waitforloginrouteready",
-      "community": 2,
-      "norm_label": "waitforloginrouteready()"
     },
     {
       "label": "globalSetup()",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L185",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L152",
       "id": "global_setup_globalsetup",
-      "community": 2,
+      "community": 5,
       "norm_label": "globalsetup()"
     },
     {
@@ -81,7 +72,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-teardown.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_configs_global_teardown_ts",
-      "community": 2,
+      "community": 9,
       "norm_label": "global-teardown.ts"
     },
     {
@@ -90,16 +81,16 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-teardown.ts",
       "source_location": "L7",
       "id": "global_teardown_globalteardown",
-      "community": 2,
+      "community": 9,
       "norm_label": "globalteardown()"
     },
     {
       "label": "playwright.config.ts",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\playwright.config.ts",
+      "source_file": "configs\\playwright.config.ts",
       "source_location": "L1",
-      "id": "e_projects_agt_orangehrm_ui_e2e_configs_playwright_config_ts",
-      "community": 19,
+      "id": "configs_playwright_config_ts",
+      "community": 18,
       "norm_label": "playwright.config.ts"
     },
     {
@@ -108,7 +99,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\build_graph.py",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_graphify_out_build_graph_py",
-      "community": 20,
+      "community": 19,
       "norm_label": "build_graph.py"
     },
     {
@@ -117,7 +108,7 @@
       "source_file": "graphify-out\\extract_ast.py",
       "source_location": "L1",
       "id": "graphify_out_extract_ast_py",
-      "community": 21,
+      "community": 20,
       "norm_label": "extract_ast.py"
     },
     {
@@ -126,7 +117,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\final_report.py",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_graphify_out_final_report_py",
-      "community": 22,
+      "community": 21,
       "norm_label": "final_report.py"
     },
     {
@@ -135,8 +126,35 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\merge_extract.py",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_graphify_out_merge_extract_py",
-      "community": 23,
+      "community": 22,
       "norm_label": "merge_extract.py"
+    },
+    {
+      "label": "run_graphify_steps_3_to_9.py",
+      "file_type": "code",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\run_graphify_steps_3_to_9.py",
+      "source_location": "L1",
+      "id": "e_projects_agt_orangehrm_ui_e2e_graphify_out_run_graphify_steps_3_to_9_py",
+      "community": 12,
+      "norm_label": "run_graphify_steps_3_to_9.py"
+    },
+    {
+      "label": "flatten_files()",
+      "file_type": "code",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\run_graphify_steps_3_to_9.py",
+      "source_location": "L20",
+      "id": "run_graphify_steps_3_to_9_flatten_files",
+      "community": 12,
+      "norm_label": "flatten_files()"
+    },
+    {
+      "label": "tokenize()",
+      "file_type": "code",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\run_graphify_steps_3_to_9.py",
+      "source_location": "L29",
+      "id": "run_graphify_steps_3_to_9_tokenize",
+      "community": 12,
+      "norm_label": "tokenize()"
     },
     {
       "label": "dashboard.ts",
@@ -144,7 +162,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\dashboard.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_dashboard_ts",
-      "community": 8,
+      "community": 7,
       "norm_label": "dashboard.ts"
     },
     {
@@ -153,7 +171,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\dashboard.ts",
       "source_location": "L8",
       "id": "dashboard_dashboardpage",
-      "community": 8,
+      "community": 7,
       "norm_label": "dashboardpage"
     },
     {
@@ -162,7 +180,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\dashboard.ts",
       "source_location": "L9",
       "id": "dashboard_dashboardpage_constructor",
-      "community": 8,
+      "community": 7,
       "norm_label": ".constructor()"
     },
     {
@@ -171,7 +189,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\dashboard.ts",
       "source_location": "L13",
       "id": "dashboard_dashboardpage_isvisible",
-      "community": 8,
+      "community": 7,
       "norm_label": ".isvisible()"
     },
     {
@@ -180,7 +198,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\dashboard.ts",
       "source_location": "L17",
       "id": "dashboard_dashboardpage_navigate",
-      "community": 8,
+      "community": 7,
       "norm_label": ".navigate()"
     },
     {
@@ -189,7 +207,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\ClaimPage.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_claim_claimpage_ts",
-      "community": 24,
+      "community": 23,
       "norm_label": "claimpage.ts"
     },
     {
@@ -198,7 +216,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_claim_actions_claimactions_ts",
-      "community": 4,
+      "community": 2,
       "norm_label": "claimactions.ts"
     },
     {
@@ -207,7 +225,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L10",
       "id": "claimactions_claimactions",
-      "community": 4,
+      "community": 2,
       "norm_label": "claimactions"
     },
     {
@@ -216,7 +234,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L11",
       "id": "claimactions_claimactions_constructor",
-      "community": 4,
+      "community": 2,
       "norm_label": ".constructor()"
     },
     {
@@ -225,7 +243,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L15",
       "id": "claimactions_claimactions_navigate",
-      "community": 4,
+      "community": 2,
       "norm_label": ".navigate()"
     },
     {
@@ -243,7 +261,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L71",
       "id": "claimactions_claimactions_read",
-      "community": 4,
+      "community": 2,
       "norm_label": ".read()"
     },
     {
@@ -252,7 +270,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L91",
       "id": "claimactions_claimactions_update",
-      "community": 4,
+      "community": 2,
       "norm_label": ".update()"
     },
     {
@@ -261,7 +279,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L117",
       "id": "claimactions_claimactions_cancel",
-      "community": 4,
+      "community": 2,
       "norm_label": ".cancel()"
     },
     {
@@ -270,7 +288,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L124",
       "id": "claimactions_claimactions_viewdetails",
-      "community": 4,
+      "community": 2,
       "norm_label": ".viewdetails()"
     },
     {
@@ -279,7 +297,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L144",
       "id": "claimactions_claimactions_delete",
-      "community": 4,
+      "community": 2,
       "norm_label": ".delete()"
     },
     {
@@ -288,7 +306,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\locators\\ClaimLocators.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_claim_locators_claimlocators_ts",
-      "community": 25,
+      "community": 24,
       "norm_label": "claimlocators.ts"
     },
     {
@@ -297,7 +315,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\EmployeePage.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_employee_employeepage_ts",
-      "community": 26,
+      "community": 25,
       "norm_label": "employeepage.ts"
     },
     {
@@ -396,7 +414,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\locators\\EmployeeLocators.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_employee_locators_employeelocators_ts",
-      "community": 27,
+      "community": 26,
       "norm_label": "employeelocators.ts"
     },
     {
@@ -405,7 +423,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\EventPage.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_event_eventpage_ts",
-      "community": 28,
+      "community": 27,
       "norm_label": "eventpage.ts"
     },
     {
@@ -414,7 +432,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_event_actions_eventactions_ts",
-      "community": 5,
+      "community": 4,
       "norm_label": "eventactions.ts"
     },
     {
@@ -423,7 +441,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L10",
       "id": "eventactions_eventactions",
-      "community": 5,
+      "community": 4,
       "norm_label": "eventactions"
     },
     {
@@ -432,7 +450,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L11",
       "id": "eventactions_eventactions_constructor",
-      "community": 5,
+      "community": 4,
       "norm_label": ".constructor()"
     },
     {
@@ -441,7 +459,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L15",
       "id": "eventactions_eventactions_navigate",
-      "community": 5,
+      "community": 4,
       "norm_label": ".navigate()"
     },
     {
@@ -450,7 +468,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L47",
       "id": "eventactions_eventactions_searchbyname",
-      "community": 5,
+      "community": 4,
       "norm_label": ".searchbyname()"
     },
     {
@@ -459,7 +477,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L58",
       "id": "eventactions_eventactions_create",
-      "community": 5,
+      "community": 4,
       "norm_label": ".create()"
     },
     {
@@ -468,7 +486,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L83",
       "id": "eventactions_eventactions_read",
-      "community": 5,
+      "community": 4,
       "norm_label": ".read()"
     },
     {
@@ -477,7 +495,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L101",
       "id": "eventactions_eventactions_update",
-      "community": 5,
+      "community": 4,
       "norm_label": ".update()"
     },
     {
@@ -486,7 +504,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L136",
       "id": "eventactions_eventactions_delete",
-      "community": 5,
+      "community": 4,
       "norm_label": ".delete()"
     },
     {
@@ -495,7 +513,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\locators\\EventLocators.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_event_locators_eventlocators_ts",
-      "community": 29,
+      "community": 28,
       "norm_label": "eventlocators.ts"
     },
     {
@@ -504,7 +522,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\leave-type\\LeaveTypePage.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_leave_type_leavetypepage_ts",
-      "community": 30,
+      "community": 29,
       "norm_label": "leavetypepage.ts"
     },
     {
@@ -585,7 +603,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\leave-type\\locators\\LeaveTypeLocators.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_pages_leave_type_locators_leavetypelocators_ts",
-      "community": 31,
+      "community": 30,
       "norm_label": "leavetypelocators.ts"
     },
     {
@@ -756,7 +774,7 @@
       "source_file": "scripts\\start-orangehrm.ts",
       "source_location": "L1",
       "id": "scripts_start_orangehrm_ts",
-      "community": 2,
+      "community": 5,
       "norm_label": "start-orangehrm.ts"
     },
     {
@@ -765,7 +783,7 @@
       "source_file": "scripts\\start-orangehrm.ts",
       "source_location": "L7",
       "id": "start_orangehrm_startorangehrm",
-      "community": 2,
+      "community": 5,
       "norm_label": "startorangehrm()"
     },
     {
@@ -774,7 +792,7 @@
       "source_file": "scripts\\stop-orangehrm.ts",
       "source_location": "L1",
       "id": "scripts_stop_orangehrm_ts",
-      "community": 2,
+      "community": 9,
       "norm_label": "stop-orangehrm.ts"
     },
     {
@@ -783,25 +801,25 @@
       "source_file": "scripts\\stop-orangehrm.ts",
       "source_location": "L3",
       "id": "stop_orangehrm_stoporangehrm",
-      "community": 2,
+      "community": 9,
       "norm_label": "stoporangehrm()"
     },
     {
       "label": "ui-installer.ts",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\scripts\\ui-installer.ts",
+      "source_file": "scripts\\ui-installer.ts",
       "source_location": "L1",
-      "id": "e_projects_agt_orangehrm_ui_e2e_scripts_ui_installer_ts",
-      "community": 1,
+      "id": "scripts_ui_installer_ts",
+      "community": 7,
       "norm_label": "ui-installer.ts"
     },
     {
       "label": "install()",
       "file_type": "code",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\scripts\\ui-installer.ts",
-      "source_location": "L6",
+      "source_file": "scripts\\ui-installer.ts",
+      "source_location": "L8",
       "id": "ui_installer_install",
-      "community": 1,
+      "community": 7,
       "norm_label": "install()"
     },
     {
@@ -918,7 +936,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\claim\\create-claim.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_claim_create_claim_spec_ts",
-      "community": 32,
+      "community": 31,
       "norm_label": "create-claim.spec.ts"
     },
     {
@@ -927,7 +945,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\claim\\delete-claim.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_claim_delete_claim_spec_ts",
-      "community": 33,
+      "community": 32,
       "norm_label": "delete-claim.spec.ts"
     },
     {
@@ -936,7 +954,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\claim\\read-claim.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_claim_read_claim_spec_ts",
-      "community": 34,
+      "community": 33,
       "norm_label": "read-claim.spec.ts"
     },
     {
@@ -945,7 +963,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\claim\\update-claim.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_claim_update_claim_spec_ts",
-      "community": 35,
+      "community": 34,
       "norm_label": "update-claim.spec.ts"
     },
     {
@@ -954,7 +972,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\employee\\create-employee.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_employee_create_employee_spec_ts",
-      "community": 36,
+      "community": 35,
       "norm_label": "create-employee.spec.ts"
     },
     {
@@ -963,7 +981,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\employee\\delete-employee.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_employee_delete_employee_spec_ts",
-      "community": 37,
+      "community": 36,
       "norm_label": "delete-employee.spec.ts"
     },
     {
@@ -972,7 +990,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\employee\\read-employee.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_employee_read_employee_spec_ts",
-      "community": 38,
+      "community": 37,
       "norm_label": "read-employee.spec.ts"
     },
     {
@@ -981,7 +999,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\employee\\update-employee.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_employee_update_employee_spec_ts",
-      "community": 39,
+      "community": 38,
       "norm_label": "update-employee.spec.ts"
     },
     {
@@ -990,7 +1008,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\event\\create-event.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_event_create_event_spec_ts",
-      "community": 40,
+      "community": 39,
       "norm_label": "create-event.spec.ts"
     },
     {
@@ -999,7 +1017,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\event\\delete-event.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_event_delete_event_spec_ts",
-      "community": 41,
+      "community": 40,
       "norm_label": "delete-event.spec.ts"
     },
     {
@@ -1008,7 +1026,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\event\\read-event.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_event_read_event_spec_ts",
-      "community": 42,
+      "community": 41,
       "norm_label": "read-event.spec.ts"
     },
     {
@@ -1017,7 +1035,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\event\\update-event.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_event_update_event_spec_ts",
-      "community": 43,
+      "community": 42,
       "norm_label": "update-event.spec.ts"
     },
     {
@@ -1026,7 +1044,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\leave-type\\create-leave-type.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_leave_type_create_leave_type_spec_ts",
-      "community": 44,
+      "community": 43,
       "norm_label": "create-leave-type.spec.ts"
     },
     {
@@ -1035,7 +1053,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\leave-type\\delete-leave-type.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_leave_type_delete_leave_type_spec_ts",
-      "community": 45,
+      "community": 44,
       "norm_label": "delete-leave-type.spec.ts"
     },
     {
@@ -1044,7 +1062,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\leave-type\\read-leave-type.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_leave_type_read_leave_type_spec_ts",
-      "community": 46,
+      "community": 45,
       "norm_label": "read-leave-type.spec.ts"
     },
     {
@@ -1053,7 +1071,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\tests\\leave-type\\update-leave-type.spec.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_tests_leave_type_update_leave_type_spec_ts",
-      "community": 47,
+      "community": 46,
       "norm_label": "update-leave-type.spec.ts"
     },
     {
@@ -1062,7 +1080,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\timestamp.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_timestamp_ts",
-      "community": 14,
+      "community": 15,
       "norm_label": "timestamp.ts"
     },
     {
@@ -1071,7 +1089,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\timestamp.ts",
       "source_location": "L5",
       "id": "timestamp_uniquename",
-      "community": 14,
+      "community": 15,
       "norm_label": "uniquename()"
     },
     {
@@ -1080,7 +1098,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\click_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_actions_click_utils_ts",
-      "community": 9,
+      "community": 10,
       "norm_label": "click_utils.ts"
     },
     {
@@ -1089,7 +1107,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\click_utils.ts",
       "source_location": "L26",
       "id": "click_utils_boxedstep",
-      "community": 9,
+      "community": 10,
       "norm_label": "boxedstep()"
     },
     {
@@ -1098,7 +1116,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\click_utils.ts",
       "source_location": "L48",
       "id": "click_utils_safeclick",
-      "community": 9,
+      "community": 10,
       "norm_label": "safeclick()"
     },
     {
@@ -1107,7 +1125,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\click_utils.ts",
       "source_location": "L115",
       "id": "click_utils_safeclick2",
-      "community": 9,
+      "community": 10,
       "norm_label": "safeclick2()"
     },
     {
@@ -1116,7 +1134,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\wait_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_actions_wait_utils_ts",
-      "community": 12,
+      "community": 13,
       "norm_label": "wait_utils.ts"
     },
     {
@@ -1125,7 +1143,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\wait_utils.ts",
       "source_location": "L20",
       "id": "wait_utils_boxedstep",
-      "community": 12,
+      "community": 13,
       "norm_label": "boxedstep()"
     },
     {
@@ -1134,7 +1152,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\actions\\wait_utils.ts",
       "source_location": "L33",
       "id": "wait_utils_waitforpagestability",
-      "community": 12,
+      "community": 13,
       "norm_label": "waitforpagestability()"
     },
     {
@@ -1143,7 +1161,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\database_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_common_database_utils_ts",
-      "community": 4,
+      "community": 2,
       "norm_label": "database_utils.ts"
     },
     {
@@ -1152,7 +1170,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\database_utils.ts",
       "source_location": "L8",
       "id": "database_utils_databaseutils",
-      "community": 4,
+      "community": 2,
       "norm_label": "databaseutils"
     },
     {
@@ -1161,7 +1179,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\database_utils.ts",
       "source_location": "L12",
       "id": "database_utils_databaseutils_executesql",
-      "community": 4,
+      "community": 2,
       "norm_label": ".executesql()"
     },
     {
@@ -1170,7 +1188,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\database_utils.ts",
       "source_location": "L35",
       "id": "database_utils_databaseutils_deleteclaimbyname",
-      "community": 4,
+      "community": 2,
       "norm_label": ".deleteclaimbyname()"
     },
     {
@@ -1179,7 +1197,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\data_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_common_data_utils_ts",
-      "community": 13,
+      "community": 14,
       "norm_label": "data_utils.ts"
     },
     {
@@ -1188,7 +1206,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\data_utils.ts",
       "source_location": "L1",
       "id": "data_utils_randomstring",
-      "community": 13,
+      "community": 14,
       "norm_label": "randomstring()"
     },
     {
@@ -1197,7 +1215,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\data_utils.ts",
       "source_location": "L10",
       "id": "data_utils_uniquesuffix",
-      "community": 13,
+      "community": 14,
       "norm_label": "uniquesuffix()"
     },
     {
@@ -1206,7 +1224,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\expect_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_common_expect_utils_ts",
-      "community": 7,
+      "community": 8,
       "norm_label": "expect_utils.ts"
     },
     {
@@ -1215,7 +1233,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\expect_utils.ts",
       "source_location": "L9",
       "id": "expect_utils_expectpolltobe",
-      "community": 7,
+      "community": 8,
       "norm_label": "expectpolltobe()"
     },
     {
@@ -1224,7 +1242,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\expect_utils.ts",
       "source_location": "L17",
       "id": "expect_utils_expectvisible",
-      "community": 7,
+      "community": 8,
       "norm_label": "expectvisible()"
     },
     {
@@ -1233,7 +1251,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\expect_utils.ts",
       "source_location": "L24",
       "id": "expect_utils_expecthidden",
-      "community": 7,
+      "community": 8,
       "norm_label": "expecthidden()"
     },
     {
@@ -1242,7 +1260,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\index.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_common_index_ts",
-      "community": 48,
+      "community": 47,
       "norm_label": "index.ts"
     },
     {
@@ -1260,7 +1278,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\locator_utils.ts",
       "source_location": "L7",
       "id": "locator_utils_getinputbylabel",
-      "community": 5,
+      "community": 4,
       "norm_label": "getinputbylabel()"
     },
     {
@@ -1287,7 +1305,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\network_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_common_network_utils_ts",
-      "community": 15,
+      "community": 16,
       "norm_label": "network_utils.ts"
     },
     {
@@ -1296,7 +1314,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\network_utils.ts",
       "source_location": "L8",
       "id": "network_utils_waitforresponsecontaining",
-      "community": 15,
+      "community": 16,
       "norm_label": "waitforresponsecontaining()"
     },
     {
@@ -1305,7 +1323,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\sync_utils.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_common_sync_utils_ts",
-      "community": 7,
+      "community": 8,
       "norm_label": "sync_utils.ts"
     },
     {
@@ -1314,7 +1332,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\sync_utils.ts",
       "source_location": "L8",
       "id": "sync_utils_waitfortablerowvisible",
-      "community": 7,
+      "community": 8,
       "norm_label": "waitfortablerowvisible()"
     },
     {
@@ -1323,7 +1341,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\sync_utils.ts",
       "source_location": "L18",
       "id": "sync_utils_waitforlocatorenabled",
-      "community": 7,
+      "community": 8,
       "norm_label": "waitforlocatorenabled()"
     },
     {
@@ -1368,7 +1386,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\logging\\logger.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_logging_logger_ts",
-      "community": 10,
+      "community": 11,
       "norm_label": "logger.ts"
     },
     {
@@ -1377,7 +1395,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\logging\\logger.ts",
       "source_location": "L1",
       "id": "logger_logstep",
-      "community": 10,
+      "community": 11,
       "norm_label": "logstep()"
     },
     {
@@ -1386,7 +1404,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\logging\\logger.ts",
       "source_location": "L5",
       "id": "logger_logsuccess",
-      "community": 10,
+      "community": 11,
       "norm_label": "logsuccess()"
     },
     {
@@ -1395,7 +1413,7 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\logging\\logger.ts",
       "source_location": "L9",
       "id": "logger_logerror",
-      "community": 10,
+      "community": 11,
       "norm_label": "logerror()"
     },
     {
@@ -1404,160 +1422,76 @@
       "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\login\\login_selectors.ts",
       "source_location": "L1",
       "id": "e_projects_agt_orangehrm_ui_e2e_utils_login_login_selectors_ts",
-      "community": 49,
+      "community": 48,
       "norm_label": "login_selectors.ts"
-    },
-    {
-      "label": "Playwright UI Automation Framework",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 11,
-      "norm_label": "playwright ui automation framework",
-      "id": "readme_playwright"
-    },
-    {
-      "label": "OrangeHRM",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 11,
-      "norm_label": "orangehrm",
-      "id": "readme_orangehrm"
-    },
-    {
-      "label": "Setup Function Pattern",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 16,
-      "norm_label": "setup function pattern",
-      "id": "readme_setup_function_pattern"
-    },
-    {
-      "label": "Page Object Model (POM)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 16,
-      "norm_label": "page object model (pom)",
-      "id": "readme_pom"
-    },
-    {
-      "label": "Atomic Tests",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 17,
-      "norm_label": "atomic tests",
-      "id": "readme_atomic_tests"
-    },
-    {
-      "label": "Parallel Execution",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 17,
-      "norm_label": "parallel execution",
-      "id": "readme_parallel_execution"
-    },
-    {
-      "label": "Monocart HTML Reporter",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 11,
-      "norm_label": "monocart html reporter",
-      "id": "readme_monocart_reporter"
-    },
-    {
-      "label": "GitHub Actions CI/CD",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 11,
-      "norm_label": "github actions ci/cd",
-      "id": "readme_github_actions"
-    },
-    {
-      "label": ".env Configuration",
-      "file_type": "document",
-      "source_file": "README.md",
-      "community": 50,
-      "norm_label": ".env configuration",
-      "id": "readme_env_config"
     }
   ],
   "links": [
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L10",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L9",
       "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "_src": "configs_global_setup_ts",
       "_tgt": "global_setup_sleep",
-      "source": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "source": "configs_global_setup_ts",
       "target": "global_setup_sleep",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L12",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L11",
       "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "_src": "configs_global_setup_ts",
       "_tgt": "global_setup_waitforcontainersready",
-      "source": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "source": "configs_global_setup_ts",
       "target": "global_setup_waitforcontainersready",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L54",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L53",
       "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "_src": "configs_global_setup_ts",
       "_tgt": "global_setup_isdatabaseschemaready",
-      "source": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "source": "configs_global_setup_ts",
       "target": "global_setup_isdatabaseschemaready",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L69",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L68",
       "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "_src": "configs_global_setup_ts",
       "_tgt": "global_setup_ensureconffileincontainer",
-      "source": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "source": "configs_global_setup_ts",
       "target": "global_setup_ensureconffileincontainer",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L153",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L152",
       "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
-      "_tgt": "global_setup_waitforloginrouteready",
-      "source": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
-      "target": "global_setup_waitforloginrouteready",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L185",
-      "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "_src": "configs_global_setup_ts",
       "_tgt": "global_setup_globalsetup",
-      "source": "e_projects_agt_orangehrm_ui_e2e_configs_global_setup_ts",
+      "source": "configs_global_setup_ts",
       "target": "global_setup_globalsetup",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L46",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L45",
       "weight": 1.0,
       "_src": "global_setup_waitforcontainersready",
       "_tgt": "global_setup_sleep",
@@ -1568,8 +1502,8 @@
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L134",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L133",
       "weight": 1.0,
       "_src": "global_setup_ensureconffileincontainer",
       "_tgt": "global_setup_sleep",
@@ -1580,32 +1514,8 @@
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L180",
-      "weight": 1.0,
-      "_src": "global_setup_waitforloginrouteready",
-      "_tgt": "global_setup_sleep",
-      "source": "global_setup_sleep",
-      "target": "global_setup_waitforloginrouteready",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L247",
-      "weight": 1.0,
-      "_src": "global_setup_globalsetup",
-      "_tgt": "global_setup_sleep",
-      "source": "global_setup_sleep",
-      "target": "global_setup_globalsetup",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L201",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L186",
       "weight": 1.0,
       "_src": "global_setup_globalsetup",
       "_tgt": "global_setup_waitforcontainersready",
@@ -1616,20 +1526,8 @@
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L166",
-      "weight": 1.0,
-      "_src": "global_setup_waitforloginrouteready",
-      "_tgt": "global_setup_isdatabaseschemaready",
-      "source": "global_setup_isdatabaseschemaready",
-      "target": "global_setup_waitforloginrouteready",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L224",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L217",
       "weight": 1.0,
       "_src": "global_setup_globalsetup",
       "_tgt": "global_setup_isdatabaseschemaready",
@@ -1639,34 +1537,10 @@
     },
     {
       "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-setup.ts",
-      "source_location": "L256",
-      "weight": 1.0,
-      "_src": "global_setup_globalsetup",
-      "_tgt": "global_setup_waitforloginrouteready",
-      "source": "global_setup_waitforloginrouteready",
-      "target": "global_setup_globalsetup",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "global-setup.ts",
-      "source_location": "L161",
-      "weight": 1.0,
-      "_src": "global_setup_waitforloginrouteready",
-      "_tgt": "loginpage_loginpage_goto",
-      "source": "global_setup_waitforloginrouteready",
-      "target": "loginpage_loginpage_goto"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "global-setup.ts",
-      "source_location": "L201",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L197",
       "weight": 1.0,
       "_src": "global_setup_globalsetup",
       "_tgt": "start_orangehrm_startorangehrm",
@@ -1677,37 +1551,13 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "global-setup.ts",
-      "source_location": "L220",
+      "source_file": "configs\\global-setup.ts",
+      "source_location": "L212",
       "weight": 1.0,
       "_src": "global_setup_globalsetup",
       "_tgt": "loginpage_loginpage_goto",
       "source": "global_setup_globalsetup",
       "target": "loginpage_loginpage_goto"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "global-setup.ts",
-      "source_location": "L247",
-      "weight": 1.0,
-      "_src": "global_setup_globalsetup",
-      "_tgt": "stop_orangehrm_stoporangehrm",
-      "source": "global_setup_globalsetup",
-      "target": "stop_orangehrm_stoporangehrm"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "global-setup.ts",
-      "source_location": "L265",
-      "weight": 1.0,
-      "_src": "global_setup_globalsetup",
-      "_tgt": "loginpage_loginpage_login",
-      "source": "global_setup_globalsetup",
-      "target": "loginpage_loginpage_login"
     },
     {
       "relation": "contains",
@@ -1725,13 +1575,37 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "global-teardown.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\configs\\global-teardown.ts",
       "source_location": "L12",
       "weight": 1.0,
       "_src": "global_teardown_globalteardown",
       "_tgt": "stop_orangehrm_stoporangehrm",
       "source": "global_teardown_globalteardown",
       "target": "stop_orangehrm_stoporangehrm"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\run_graphify_steps_3_to_9.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "e_projects_agt_orangehrm_ui_e2e_graphify_out_run_graphify_steps_3_to_9_py",
+      "_tgt": "run_graphify_steps_3_to_9_flatten_files",
+      "source": "e_projects_agt_orangehrm_ui_e2e_graphify_out_run_graphify_steps_3_to_9_py",
+      "target": "run_graphify_steps_3_to_9_flatten_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\graphify-out\\run_graphify_steps_3_to_9.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "e_projects_agt_orangehrm_ui_e2e_graphify_out_run_graphify_steps_3_to_9_py",
+      "_tgt": "run_graphify_steps_3_to_9_tokenize",
+      "source": "e_projects_agt_orangehrm_ui_e2e_graphify_out_run_graphify_steps_3_to_9_py",
+      "target": "run_graphify_steps_3_to_9_tokenize",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -1785,7 +1659,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\claim\\actions\\ClaimActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L157",
       "weight": 1.0,
       "_src": "dashboard_dashboardpage_isvisible",
@@ -1797,7 +1671,19 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\dashboard.ts",
+      "source_file": "scripts\\ui-installer.ts",
+      "source_location": "L127",
+      "weight": 1.0,
+      "_src": "dashboard_dashboardpage_isvisible",
+      "_tgt": "ui_installer_install",
+      "source": "dashboard_dashboardpage_isvisible",
+      "target": "ui_installer_install"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\dashboard.ts",
       "source_location": "L18",
       "weight": 1.0,
       "_src": "dashboard_dashboardpage_navigate",
@@ -1965,7 +1851,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\claim\\actions\\ClaimActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L16",
       "weight": 1.0,
       "_src": "claimactions_claimactions_navigate",
@@ -1977,7 +1863,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\claim\\actions\\ClaimActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L26",
       "weight": 1.0,
       "_src": "claimactions_claimactions_create",
@@ -1989,7 +1875,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\claim\\actions\\ClaimActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L58",
       "weight": 1.0,
       "_src": "claimactions_claimactions_create",
@@ -2013,7 +1899,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\claim\\actions\\ClaimActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\claim\\actions\\ClaimActions.ts",
       "source_location": "L217",
       "weight": 1.0,
       "_src": "claimactions_claimactions_delete",
@@ -2145,7 +2031,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\employee\\actions\\EmployeeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\actions\\EmployeeActions.ts",
       "source_location": "L16",
       "weight": 1.0,
       "_src": "employeeactions_employeeactions_navigate",
@@ -2241,7 +2127,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\employee\\actions\\EmployeeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\actions\\EmployeeActions.ts",
       "source_location": "L59",
       "weight": 1.0,
       "_src": "employeeactions_employeeactions_create",
@@ -2253,7 +2139,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\employee\\actions\\EmployeeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\actions\\EmployeeActions.ts",
       "source_location": "L74",
       "weight": 1.0,
       "_src": "employeeactions_employeeactions_create",
@@ -2265,7 +2151,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\employee\\actions\\EmployeeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\actions\\EmployeeActions.ts",
       "source_location": "L111",
       "weight": 1.0,
       "_src": "employeeactions_employeeactions_read",
@@ -2277,7 +2163,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\employee\\actions\\EmployeeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\actions\\EmployeeActions.ts",
       "source_location": "L133",
       "weight": 1.0,
       "_src": "employeeactions_employeeactions_update",
@@ -2289,7 +2175,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\employee\\actions\\EmployeeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\employee\\actions\\EmployeeActions.ts",
       "source_location": "L170",
       "weight": 1.0,
       "_src": "employeeactions_employeeactions_delete",
@@ -2445,7 +2331,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\event\\actions\\EventActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L16",
       "weight": 1.0,
       "_src": "eventactions_eventactions_navigate",
@@ -2493,7 +2379,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\event\\actions\\EventActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L48",
       "weight": 1.0,
       "_src": "eventactions_eventactions_searchbyname",
@@ -2505,7 +2391,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\event\\actions\\EventActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L67",
       "weight": 1.0,
       "_src": "eventactions_eventactions_create",
@@ -2517,7 +2403,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\event\\actions\\EventActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\event\\actions\\EventActions.ts",
       "source_location": "L119",
       "weight": 1.0,
       "_src": "eventactions_eventactions_update",
@@ -2661,7 +2547,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\leave-type\\actions\\LeaveTypeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\leave-type\\actions\\LeaveTypeActions.ts",
       "source_location": "L16",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_navigate",
@@ -2673,7 +2559,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\leave-type\\actions\\LeaveTypeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\leave-type\\actions\\LeaveTypeActions.ts",
       "source_location": "L35",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_create",
@@ -2685,7 +2571,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\claim.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\claim.setup.ts",
       "source_location": "L15",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_create",
@@ -2697,7 +2583,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\employee.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\employee.setup.ts",
       "source_location": "L14",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_create",
@@ -2709,7 +2595,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\event.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\event.setup.ts",
       "source_location": "L10",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_create",
@@ -2721,7 +2607,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\leave-type.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\leave-type.setup.ts",
       "source_location": "L10",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_create",
@@ -2733,7 +2619,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\leave-type\\actions\\LeaveTypeActions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\leave-type\\actions\\LeaveTypeActions.ts",
       "source_location": "L81",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_update",
@@ -2745,7 +2631,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\claim.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\claim.setup.ts",
       "source_location": "L31",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_delete",
@@ -2757,7 +2643,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\employee.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\employee.setup.ts",
       "source_location": "L26",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_delete",
@@ -2769,7 +2655,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\event.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\event.setup.ts",
       "source_location": "L19",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_delete",
@@ -2781,7 +2667,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\setup\\leave-type.setup.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\setups\\leave-type.setup.ts",
       "source_location": "L19",
       "weight": 1.0,
       "_src": "leavetypeactions_leavetypeactions_delete",
@@ -2949,7 +2835,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\pages\\login\\base.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\pages\\login\\base.ts",
       "source_location": "L12",
       "weight": 1.0,
       "_src": "base_basepage_gotoandwait",
@@ -3021,11 +2907,11 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\scripts\\ui-installer.ts",
-      "source_location": "L25",
+      "source_file": "scripts\\ui-installer.ts",
+      "source_location": "L103",
       "weight": 1.0,
-      "_src": "ui_installer_install",
-      "_tgt": "loginpage_loginpage_goto",
+      "_src": "loginpage_loginpage_goto",
+      "_tgt": "ui_installer_install",
       "source": "loginpage_loginpage_goto",
       "target": "ui_installer_install"
     },
@@ -3056,12 +2942,12 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\scripts\\ui-installer.ts",
-      "source_location": "L6",
+      "source_file": "scripts\\ui-installer.ts",
+      "source_location": "L8",
       "weight": 1.0,
-      "_src": "e_projects_agt_orangehrm_ui_e2e_scripts_ui_installer_ts",
+      "_src": "scripts_ui_installer_ts",
       "_tgt": "ui_installer_install",
-      "source": "e_projects_agt_orangehrm_ui_e2e_scripts_ui_installer_ts",
+      "source": "scripts_ui_installer_ts",
       "target": "ui_installer_install",
       "confidence_score": 1.0
     },
@@ -3381,7 +3267,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\utils\\common\\sync_utils.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\sync_utils.ts",
       "source_location": "L22",
       "weight": 1.0,
       "_src": "expect_utils_expectpolltobe",
@@ -3393,7 +3279,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\utils\\common\\sync_utils.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\common\\sync_utils.ts",
       "source_location": "L15",
       "weight": 1.0,
       "_src": "expect_utils_expectvisible",
@@ -3441,7 +3327,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\utils\\dashboard\\table_assertions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\dashboard\\table_assertions.ts",
       "source_location": "L13",
       "weight": 1.0,
       "_src": "locator_utils_gettablerowbytext",
@@ -3453,7 +3339,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\utils\\dashboard\\table_assertions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\dashboard\\table_assertions.ts",
       "source_location": "L21",
       "weight": 1.0,
       "_src": "locator_utils_gettablerowbytext",
@@ -3465,7 +3351,7 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "src\\utils\\dashboard\\table_assertions.ts",
+      "source_file": "E:\\Projects\\AGT\\OrangeHRM-UI-E2E\\utils\\dashboard\\table_assertions.ts",
       "source_location": "L30",
       "weight": 1.0,
       "_src": "locator_utils_gettablerowbytext",
@@ -3580,51 +3466,6 @@
       "source": "e_projects_agt_orangehrm_ui_e2e_utils_logging_logger_ts",
       "target": "logger_logerror",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "tests",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "_src": "readme_playwright",
-      "_tgt": "readme_orangehrm",
-      "source": "readme_playwright",
-      "target": "readme_orangehrm"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "_src": "readme_playwright",
-      "_tgt": "readme_github_actions",
-      "source": "readme_playwright",
-      "target": "readme_github_actions"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "_src": "readme_playwright",
-      "_tgt": "readme_monocart_reporter",
-      "source": "readme_playwright",
-      "target": "readme_monocart_reporter"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "_src": "readme_setup_function_pattern",
-      "_tgt": "readme_pom",
-      "source": "readme_setup_function_pattern",
-      "target": "readme_pom"
-    },
-    {
-      "relation": "enables",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "_src": "readme_atomic_tests",
-      "_tgt": "readme_parallel_execution",
-      "source": "readme_atomic_tests",
-      "target": "readme_parallel_execution"
     }
   ],
   "hyperedges": []

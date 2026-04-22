@@ -5,7 +5,7 @@ import { getTextareaByLabel } from "../../../utils/common";
 
 /**
  * Action methods for the Claim (Self) module.
- * Includes: create, read, update, delete, cancel, viewDetails
+ * Includes: create, read, cancel, delete, viewDetails
  */
 export class ClaimActions extends BasePage {
     constructor(page: Page) {
@@ -15,7 +15,7 @@ export class ClaimActions extends BasePage {
     public async navigate(): Promise<void> {
         await this.page.goto(
             `${process.env.BASE_URL}${ClaimLocators.viewClaimUrl}`,
-            { waitUntil: "domcontentloaded" },
+            { waitUntil: "load" },
         );
         await this.page
             .locator(".oxd-layout-context")
@@ -31,7 +31,6 @@ export class ClaimActions extends BasePage {
             .locator(".oxd-form")
             .waitFor({ state: "visible", timeout: 15000 });
 
-        // Select Event from dropdown
         const eventGroup = this.page.locator(ClaimLocators.inputGroup, {
             has: this.page.locator("label", {
                 hasText: ClaimLocators.eventLabel,
@@ -44,7 +43,6 @@ export class ClaimActions extends BasePage {
             .getByText(eventName)
             .click();
 
-        // Select Currency (first available)
         const currencyGroup = this.page.locator(ClaimLocators.inputGroup, {
             has: this.page.locator("label", {
                 hasText: ClaimLocators.currencyLabel,
@@ -54,7 +52,6 @@ export class ClaimActions extends BasePage {
         await currencyDropdown.click();
         await this.page.locator(".oxd-select-option").nth(1).click();
 
-        // Fill Remarks
         const textarea = getTextareaByLabel(this.page, {
             labelText: ClaimLocators.remarksLabel,
         });
@@ -64,7 +61,9 @@ export class ClaimActions extends BasePage {
 
         await this.page.locator(ClaimLocators.submitButton).click();
         await expect(this.page.locator(ClaimLocators.successToast)).toBeVisible(
-            { timeout: 15000 },
+            {
+                timeout: 15000,
+            },
         );
     }
 
@@ -85,20 +84,20 @@ export class ClaimActions extends BasePage {
         }
     }
 
-    /**
-     * Update: Cancels an Initiated claim (the only allowed state change by employee).
-     */
-    async update(eventName: string): Promise<void> {
+    private async openClaimDetails(eventName: string): Promise<void> {
         await this.navigate();
         const row = this.page.locator(ClaimLocators.tableCard, {
             hasText: eventName,
         });
         await row.waitFor({ state: "visible", timeout: 15000 });
         await row.locator("button").first().click();
-
         await this.page
             .locator(".oxd-form")
             .waitFor({ state: "visible", timeout: 15000 });
+    }
+
+    async cancel(eventName: string): Promise<void> {
+        await this.openClaimDetails(eventName);
 
         const cancelBtn = this.page
             .locator("button")
@@ -107,44 +106,25 @@ export class ClaimActions extends BasePage {
         await cancelBtn.waitFor({ state: "visible", timeout: 5000 });
         await cancelBtn.click();
         await expect(this.page.locator(ClaimLocators.successToast)).toBeVisible(
-            { timeout: 15000 },
+            {
+                timeout: 15000,
+            },
         );
     }
 
-    /**
-     * Cancel: Explicitly cancel an Initiated claim from the details view.
-     */
-    async cancel(eventName: string): Promise<void> {
-        await this.update(eventName);
+    async update(eventName: string): Promise<void> {
+        // In Claim (Self) context, "update" is often synonymous with status change (Cancellation)
+        return this.cancel(eventName);
     }
 
-    /**
-     * View Details: Navigate into a claim's detail page and return the page URL.
-     */
     async viewDetails(eventName: string): Promise<string> {
-        await this.navigate();
-        const row = this.page.locator(ClaimLocators.tableCard, {
-            hasText: eventName,
-        });
-        await row.waitFor({ state: "visible", timeout: 15000 });
-        await row
-            .locator("button")
-            .filter({ hasText: ClaimLocators.viewDetailsButton })
-            .click();
-        await this.page
-            .locator(".oxd-form")
-            .waitFor({ state: "visible", timeout: 15000 });
+        await this.openClaimDetails(eventName);
         return this.page.url();
     }
 
-    /**
-     * Delete: Multi-strategy deletion for OrangeHRM 5.8.1.
-     * Tries details-view Delete/Discard button first, then falls back to Database.
-     */
     async delete(eventName: string, remarks?: string): Promise<void> {
         await this.navigate();
 
-        // Search to isolate the record in UI
         const eventGroup = this.page.locator(ClaimLocators.inputGroup, {
             has: this.page.locator("label", {
                 hasText: ClaimLocators.eventNameLabel,
@@ -176,7 +156,6 @@ export class ClaimActions extends BasePage {
             return;
         }
 
-        // Enter details view
         await row.locator("button").first().click();
         await this.page
             .locator(".oxd-form")
@@ -209,7 +188,7 @@ export class ClaimActions extends BasePage {
             }
         } else {
             console.warn(
-                `[ClaimActions.delete] UI Delete button missing in 5.8.1. Falling back to Database Deletion for: ${remarks || eventName}`,
+                `[ClaimActions.delete] UI Delete button missing in 5.8.1. Falling back to database deletion for: ${remarks || eventName}`,
             );
             const {
                 DatabaseUtils,

@@ -3,7 +3,7 @@
  */
 export const EventLocators = {
     // Navigation
-    assignClaimUrl: "/web/index.php/claim/viewAssignClaim",
+    eventListUrl: "/web/index.php/claim/viewAssignClaim",
     configurationTab: "Configuration",
     eventsLink: "Events",
 

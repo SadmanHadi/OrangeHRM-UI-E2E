@@ -1,7 +1,7 @@
+import { ClaimActions } from "./actions/ClaimActions";
+
 /**
- * Claim Page — re-exports ClaimActions for use in tests.
- * Actions: src/pages/claim/actions/ClaimActions.ts
- * Locators: src/pages/claim/locators/ClaimLocators.ts
+ * ClaimPage keeps page-object import stable while action logic stays modular.
  */
-export { ClaimActions as ClaimPage } from "./actions/ClaimActions";
+export class ClaimPage extends ClaimActions {}
 export { ClaimLocators } from "./locators/ClaimLocators";

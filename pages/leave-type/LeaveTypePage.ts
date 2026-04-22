@@ -1,7 +1,7 @@
+import { LeaveTypeActions } from "./actions/LeaveTypeActions";
+
 /**
- * Leave Type Page — re-exports LeaveTypeActions for use in tests.
- * Actions: src/pages/leave-type/actions/LeaveTypeActions.ts
- * Locators: src/pages/leave-type/locators/LeaveTypeLocators.ts
+ * LeaveTypePage keeps page-object import stable while action logic stays modular.
  */
-export { LeaveTypeActions as LeaveTypePage } from "./actions/LeaveTypeActions";
+export class LeaveTypePage extends LeaveTypeActions {}
 export { LeaveTypeLocators } from "./locators/LeaveTypeLocators";
