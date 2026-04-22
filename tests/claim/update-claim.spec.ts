@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { ClaimPage } from "../../src/pages/dashboard/ClaimPage";
+import { ClaimPage } from "../../src/pages/claim/ClaimPage";
 import { uniqueName } from "../../src/utils/timestamp";
 import {
     createClaimWithEvent,
@@ -24,8 +24,8 @@ test.describe("Claim (Self) - Update", () => {
     });
 
     test.afterEach(async ({ page }) => {
-        // Cleanup: Remove both dependencies
-        await deleteClaimAndEvent(page, eventName);
+        // Cleanup: Remove both dependencies using hybrid delete
+        await deleteClaimAndEvent(page, eventName, remarks);
     });
 
     test("should update claim status to Cancelled successfully", async ({

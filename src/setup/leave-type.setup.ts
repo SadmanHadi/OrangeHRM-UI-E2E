@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { LeaveTypePage } from "../pages/dashboard/LeaveTypePage";
+import { LeaveTypePage } from "../pages/leave-type/LeaveTypePage";
 
 /**
  * Project-specific setup helper to create a leave type.

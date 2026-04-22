@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { EventPage } from "../../src/pages/dashboard/EventPage";
+import { EventPage } from "../../src/pages/event/EventPage";
 import { uniqueName } from "../../src/utils/timestamp";
 import { createEvent, deleteEvent } from "../../src/setup/event.setup";
 import { expectTableRowVisible } from "../../src/utils/dashboard/table_assertions";

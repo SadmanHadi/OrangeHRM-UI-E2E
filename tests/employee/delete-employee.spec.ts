@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { EmployeePage } from "../../src/pages/dashboard/EmployeePage";
+import { EmployeePage } from "../../src/pages/employee/EmployeePage";
 import { uniqueName } from "../../src/utils/timestamp";
 import { createEmployee } from "../../src/setup/employee.setup";
 import { expectTableRowHidden } from "../../src/utils/dashboard/table_assertions";

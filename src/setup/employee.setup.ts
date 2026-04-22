@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { EmployeePage } from "../pages/dashboard/EmployeePage";
+import { EmployeePage } from "../pages/employee/EmployeePage";
 
 /**
  * Project-specific setup helper to create an employee.

@@ -1,5 +1,5 @@
 import { test, type Page } from "@playwright/test";
-import { logStep } from "src/utils/logging/logger";
+import { logError, logStep, logSuccess } from "../logging/logger";
 
 type WaitForStabilityOptions = {
     /** How long the DOM must remain unchanged to be considered "stable" */

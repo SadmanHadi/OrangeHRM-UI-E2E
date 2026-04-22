@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { ClaimPage } from "../../src/pages/dashboard/ClaimPage";
+import { ClaimPage } from "../../src/pages/claim/ClaimPage";
 import { uniqueName } from "../../src/utils/timestamp";
 import {
     createClaimWithEvent,
@@ -23,12 +23,13 @@ test.describe("Claim (Self) - Delete", () => {
 
     test.afterEach(async ({ page }) => {
         // Cleanup: Remove both dependencies from DB where possible
-        await deleteClaimAndEvent(page, eventName);
+        await deleteClaimAndEvent(page, eventName, remarks);
     });
 
     test("should delete claim successfully", async ({ page }) => {
         const claimPage = new ClaimPage(page);
-        await claimPage.delete(eventName);
+        // Pass eventName for UI navigation and remarks for DB deletion fallback
+        await claimPage.delete(eventName, remarks);
 
         const exists = await claimPage.read(eventName);
         await expectTableRowHidden(page, eventName);

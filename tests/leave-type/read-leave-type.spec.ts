@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { LeaveTypePage } from "../../src/pages/dashboard/LeaveTypePage";
+import { LeaveTypePage } from "../../src/pages/leave-type/LeaveTypePage";
 import { uniqueName } from "../../src/utils/timestamp";
 import {
     createLeaveType,

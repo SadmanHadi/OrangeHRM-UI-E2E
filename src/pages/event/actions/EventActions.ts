@@ -1,19 +1,25 @@
 import { expect, type Page } from "@playwright/test";
 import { EventLocators } from "../locators/EventLocators";
 import { getInputByLabel } from "../../../utils/common";
+import { BasePage } from "../../login/base";
 
 /**
- * Action methods for the Event module (Claim > Configuration > Events).
+ * Action methods for the Event module.
+ * Requirement: Inherits from BasePage.
  */
-export class EventActions {
-    constructor(private readonly page: Page) {}
+export class EventActions extends BasePage {
+    constructor(page: Page) {
+        super(page);
+    }
 
-    private async navigate(): Promise<void> {
+    public async navigate(): Promise<void> {
         await this.page.goto(
             `${process.env.BASE_URL}/web/index.php/claim/viewAssignClaim`,
             { waitUntil: "domcontentloaded" },
         );
-        await this.page.locator(".oxd-layout-context").waitFor({ state: "visible", timeout: 30000 });
+        await this.page
+            .locator(".oxd-layout-context")
+            .waitFor({ state: "visible", timeout: 30000 });
 
         const configureTab = this.page.locator(EventLocators.topbarNavTab, {
             hasText: EventLocators.configurationTab,
@@ -27,42 +33,64 @@ export class EventActions {
         await eventsLink.waitFor({ state: "visible", timeout: 5000 });
         await eventsLink.click();
 
-        await this.page.locator(".oxd-layout-context").waitFor({ state: "visible", timeout: 30000 });
         await this.page
-            .locator(`${EventLocators.tableBody}, ${EventLocators.secondaryButton}`)
+            .locator(".oxd-layout-context")
+            .waitFor({ state: "visible", timeout: 30000 });
+        await this.page
+            .locator(
+                `${EventLocators.tableBody}, ${EventLocators.secondaryButton}`,
+            )
             .first()
             .waitFor({ state: "visible", timeout: 15000 });
     }
 
     private async searchByName(name: string): Promise<void> {
-        const searchInput = getInputByLabel(this.page, { labelText: EventLocators.eventNameLabel });
+        const searchInput = getInputByLabel(this.page, {
+            labelText: EventLocators.eventNameLabel,
+        });
         await searchInput.fill(name);
-        await this.page.getByRole("button", { name: EventLocators.searchButton }).click();
+        await this.page
+            .getByRole("button", { name: EventLocators.searchButton })
+            .click();
         await this.page.waitForLoadState("domcontentloaded");
     }
 
     async create(name: string): Promise<void> {
         await this.navigate();
-        await this.page.getByRole("button", { name: EventLocators.addButton }).click();
-        await this.page.locator(".oxd-form").waitFor({ state: "visible", timeout: 10000 });
+        await this.page
+            .getByRole("button", { name: EventLocators.addButton })
+            .click();
+        await this.page
+            .locator(".oxd-form")
+            .waitFor({ state: "visible", timeout: 10000 });
 
-        const formInput = getInputByLabel(this.page, { labelText: EventLocators.eventNameLabel });
+        const formInput = getInputByLabel(this.page, {
+            labelText: EventLocators.eventNameLabel,
+        });
         await formInput.waitFor({ state: "visible", timeout: 5000 });
         await formInput.click();
         await formInput.fill(name);
         await expect(formInput).toHaveValue(name);
 
-        await this.page.getByRole("button", { name: EventLocators.saveButton }).click();
-        await expect(this.page.locator(EventLocators.successToast)).toBeVisible({ timeout: 15000 });
+        await this.page
+            .getByRole("button", { name: EventLocators.saveButton })
+            .click();
+        await expect(this.page.locator(EventLocators.successToast)).toBeVisible(
+            { timeout: 15000 },
+        );
     }
 
     async read(name: string): Promise<boolean> {
         await this.navigate();
         await this.searchByName(name);
-        const row = this.page.locator(EventLocators.tableCard, { hasText: name });
+        const row = this.page.locator(EventLocators.tableCard, {
+            hasText: name,
+        });
         try {
             await expect
-                .poll(async () => row.isVisible().catch(() => false), { timeout: 5000 })
+                .poll(async () => row.isVisible().catch(() => false), {
+                    timeout: 5000,
+                })
                 .toBe(true);
             return true;
         } catch {
@@ -74,7 +102,9 @@ export class EventActions {
         await this.navigate();
         await this.searchByName(oldName);
 
-        const row = this.page.locator(EventLocators.tableCard, { hasText: oldName });
+        const row = this.page.locator(EventLocators.tableCard, {
+            hasText: oldName,
+        });
         await row.waitFor({ state: "visible", timeout: 10000 });
 
         await row
@@ -82,24 +112,34 @@ export class EventActions {
             .filter({ has: this.page.locator(EventLocators.editIcon) })
             .click();
 
-        await this.page.locator(".oxd-form").waitFor({ state: "visible", timeout: 10000 });
+        await this.page
+            .locator(".oxd-form")
+            .waitFor({ state: "visible", timeout: 10000 });
 
-        const formInput = getInputByLabel(this.page, { labelText: EventLocators.eventNameLabel });
+        const formInput = getInputByLabel(this.page, {
+            labelText: EventLocators.eventNameLabel,
+        });
         await formInput.waitFor({ state: "visible", timeout: 5000 });
         await formInput.click();
         await formInput.clear();
         await formInput.fill(newName);
         await expect(formInput).toHaveValue(newName);
 
-        await this.page.getByRole("button", { name: EventLocators.saveButton }).click();
-        await expect(this.page.locator(EventLocators.successToast)).toBeVisible({ timeout: 15000 });
+        await this.page
+            .getByRole("button", { name: EventLocators.saveButton })
+            .click();
+        await expect(this.page.locator(EventLocators.successToast)).toBeVisible(
+            { timeout: 15000 },
+        );
     }
 
     async delete(name: string): Promise<void> {
         await this.navigate();
         await this.searchByName(name);
 
-        const row = this.page.locator(EventLocators.tableCard, { hasText: name });
+        const row = this.page.locator(EventLocators.tableCard, {
+            hasText: name,
+        });
         try {
             await row.waitFor({ state: "visible", timeout: 5000 });
         } catch {
@@ -117,6 +157,8 @@ export class EventActions {
                 hasText: EventLocators.confirmDeleteText,
             })
             .click();
-        await expect(this.page.locator(EventLocators.successToast)).toBeVisible({ timeout: 15000 });
+        await expect(this.page.locator(EventLocators.successToast)).toBeVisible(
+            { timeout: 15000 },
+        );
     }
 }

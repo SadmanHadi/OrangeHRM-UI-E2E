@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { EventPage } from "../pages/dashboard/EventPage";
+import { EventPage } from "../pages/event/EventPage";
 
 /**
  * Project-specific setup helper to create an event.

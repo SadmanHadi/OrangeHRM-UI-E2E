@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { ClaimPage } from "../../src/pages/dashboard/ClaimPage";
+import { ClaimPage } from "../../src/pages/claim/ClaimPage";
 import { uniqueName } from "../../src/utils/timestamp";
 import {
     createClaimWithEvent,
@@ -19,8 +19,8 @@ test.describe("Claim (Self) - Create", () => {
     });
 
     test.afterEach(async ({ page }) => {
-        // Cleanup: Remove both claim and event
-        await deleteClaimAndEvent(page, eventName);
+        // Cleanup: Remove both claim and event using hybrid delete
+        await deleteClaimAndEvent(page, eventName, remarks);
     });
 
     test("should successfully create a self-claim with mandatory event", async ({

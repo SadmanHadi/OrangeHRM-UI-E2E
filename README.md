@@ -1,88 +1,136 @@
-# OrangeHRM UI E2E Automation
+# OrangeHRM UI E2E Automation Framework
 
-End-to-end UI test automation for OrangeHRM using Playwright, TypeScript, Docker, and GitHub Actions.
+A production-grade, enterprise-level E2E automation framework for **OrangeHRM 5.8.1**, built with **Playwright**, **TypeScript**, and **Docker**. This framework follows the **Setup Function Pattern**, uses a modular **Page Object Model (POM)** structure, and is fully integrated with **GitHub Actions**.
 
-## Test Coverage (16 Atomic CRUD Tests)
+---
 
-| Module       | Create | Read | Update | Delete |
-| ------------ | :----: | :--: | :----: | :----: |
-| Employee     |   ✅   |  ✅  |   ✅   |   ✅   |
-| Event        |   ✅   |  ✅  |   ✅   |   ✅   |
-| Leave Type   |   ✅   |  ✅  |   ✅   |   ✅   |
-| Claim (Self) |   ✅   |  ✅  |   ✅   |   ✅   |
+## 🚀 Quick Start (Production Setup)
 
-Test case documentation lives in [orangehrm-testcases.csv](orangehrm-testcases.csv).
+### 1. Prerequisites
 
-## Architecture & Patterns
+Ensure you have the following installed:
 
-- Page Object Model: [src/pages](src/pages)
-- Setup Functions Pattern: [src/setup](src/setup) and [global-setup.ts](global-setup.ts)
-- Unique data strategy: `uniqueName()` uses ${Date.now()} and ${Math.random()} for parallel safety
-- Strict TypeScript + ESLint + Prettier
+- **Node.js LTS** (v18 or higher)
+- **pnpm** (v10 or higher)
+- **Docker Desktop** (with Docker Compose)
+- **Git**
 
-## Prerequisites
+### 2. Installation
 
-- Node.js LTS (18+)
-- pnpm (10+)
-- Docker + Docker Compose
-
-## Install
+Clone the repository and install all dependencies:
 
 ```bash
+# Install node dependencies
 pnpm install
+
+# Install Playwright browsers and system dependencies
 pnpm exec playwright install --with-deps
 ```
 
-## Run Locally
+### 3. Environment Configuration
 
-1. Create your local env file:
+The framework uses `.env` files for secure configuration. **Never commit your `.env` file.**
 
 ```bash
+# Create your local environment file
 cp .env.example .env
 ```
 
-2. Set required values in `.env` (no secrets in repo).
+Open `.env` and configure the following:
 
-3. Run tests:
+- `BASE_URL`: The local URL where OrangeHRM will run (default: `http://localhost`).
+- `ADMIN_USERNAME`: Default admin username (e.g., `Admin`).
+- `ADMIN_PASSWORD`: Strong password for the admin account (must meet 5.8.1 requirements).
+- `DB_ROOT_PASSWORD`, `DB_PASSWORD`: Database credentials for the MariaDB container.
+
+### 4. Running the Application & Tests
+
+The framework handles server orchestration automatically. You can run tests directly, and the server will start via `globalSetup`.
+
+#### Run All Tests (Parallel, Multi-browser)
 
 ```bash
 pnpm test
 ```
 
-Optional:
+#### Run with UI Mode (Interactive)
 
 ```bash
 pnpm test:ui
 ```
 
-## Run with Docker
+#### Manual Server Control
 
-Run the application and test runner via Docker Compose:
+If you want to start or stop the OrangeHRM environment manually:
 
 ```bash
-docker compose up -d
-docker compose run --rm test-runner
+# Start server
+pnpm run start:orangehrm
+
+# Stop server
+pnpm run stop:orangehrm
 ```
 
-## Run in CI (GitHub Actions)
+---
 
-Add these secrets in your GitHub repo:
+## 🏗️ Project Structure
+
+The project is organized by module to ensure scalability and maintainability:
+
+```text
+src/pages/
+  ├── [module]/              # e.g., employee, leave-type, event, claim
+  │   ├── actions/           # Module-specific action methods (create, update, delete, etc.)
+  │   ├── locators/          # Module-specific locator constants
+  │   └── [Module]Page.ts    # Main page object (re-exports actions)
+  ├── base/                  # BasePage with shared utilities
+  └── login/                 # Shared Login module
+tests/                       # Atomic CRUD test files organized by module
+src/setup/                   # Project-specific setup/cleanup helpers
+scripts/                     # Server automation and installer scripts (TypeScript)
+```
+
+---
+
+## 📊 Reporting & Debugging
+
+The framework generates comprehensive reports for every run:
+
+- **Monocart HTML Reporter**: Located at `playwright-report/monocart/index.html`. Provides a high-level overview and deep-dive into test results.
+- **Playwright HTML Report**: Located at `playwright-report/html/index.html`.
+- **Traces**: Playwright traces are captured on the first retry of a failed test. View them in `test-results/` using the Playwright Trace Viewer.
+- **Screenshots/Videos**: Automatically captured on failure and stored in `test-results/`.
+
+---
+
+## 🤖 CI/CD Integration
+
+This project is fully ready for **GitHub Actions**. The pipeline handles:
+
+1. Environment setup (Node, pnpm).
+2. Dependency installation.
+3. Linting and formatting checks (`pnpm run lint`, `pnpm run format:check`).
+4. Automated OrangeHRM server startup.
+5. Parallel test execution across **Chromium, Firefox, Webkit, and Edge**.
+6. **Artifact Upload**: Reports, traces, and logs are saved for 30 days.
+
+### Required GitHub Secrets
+
+To run the CI pipeline, add these secrets to your repository:
 
 - `ADMIN_USERNAME`
 - `ADMIN_PASSWORD`
 - `DB_ROOT_PASSWORD`
 - `DB_PASSWORD`
 
-The workflow will build a local `.env`, start the server, run lint/format checks, execute tests across 4 browsers, and upload artifacts.
+---
 
-## Report Locations
+## ⚠️ Known Limitations & Assumptions
 
-- Monocart report: [playwright-report/monocart/index.html](playwright-report/monocart/index.html)
-- Playwright HTML report: [playwright-report/html/index.html](playwright-report/html/index.html)
-- Raw results and traces: [test-results](test-results)
+- **First Boot Latency**: The very first time you start the server, OrangeHRM initializes its database schema. This can take 3–5 minutes. The framework includes a health check to wait for this process.
+- **Claim Deletion**: In OrangeHRM 5.8.1, "Initiated" claims may have business rules preventing deletion until they are in a specific state. The framework handles this gracefully with logged warnings.
+- **Docker Resources**: Ensure Docker has at least 4GB of RAM allocated for smooth parallel execution.
 
-## Known Limitations
+---
 
-- First boot may take several minutes while OrangeHRM initializes the database.
-- Coverage is focused on happy-path CRUD flows only.
-- Local execution is capped at 4 workers by default to reduce resource contention.
+_Built with ❤️ for the OrangeHRM E2E Bootcamp._

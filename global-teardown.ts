@@ -10,7 +10,9 @@ async function globalTeardown() {
     );
     try {
         // stopOrangeHRM();
-        console.log("[global-teardown] Cleanup skipped to preserve environment state.");
+        console.log(
+            "[global-teardown] Cleanup skipped to preserve environment state.",
+        );
     } catch (error: any) {
         console.error(
             "[global-teardown] Error during Docker cleanup:",

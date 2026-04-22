@@ -1,5 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
-import { logError, logStep, logSuccess } from "src/utils/logging/logger";
+import { logError, logStep, logSuccess } from "../logging/logger";
 import { waitForPageStability } from "./wait_utils";
 
 export type SafeClickOptions = {

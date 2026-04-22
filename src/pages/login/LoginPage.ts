@@ -1,5 +1,5 @@
 import { type Page } from "@playwright/test";
-import { BasePage } from "../base/BasePage";
+import { BasePage } from "./base";
 import { loginSelectors } from "../../utils/login/login_selectors";
 
 export class LoginPage extends BasePage {

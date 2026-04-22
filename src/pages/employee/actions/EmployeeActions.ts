@@ -1,13 +1,24 @@
 import { expect, type Page } from "@playwright/test";
 import { EmployeeLocators } from "../locators/EmployeeLocators";
 import { getInputByLabel } from "../../../utils/common";
+import { BasePage } from "../../login/base";
 
 /**
  * Action methods for the Employee module.
- * Inherits no base class — all actions are standalone and composable.
+ * Requirement: Inherits from BasePage.
  */
-export class EmployeeActions {
-    constructor(private readonly page: Page) {}
+export class EmployeeActions extends BasePage {
+    constructor(page: Page) {
+        super(page);
+    }
+
+    async navigate(): Promise<void> {
+        await this.page.goto(
+            `${process.env.BASE_URL}${EmployeeLocators.employeeListUrl}`,
+            { waitUntil: "domcontentloaded" },
+        );
+        await this.waitForSpinner();
+    }
 
     private async waitForSpinner(): Promise<void> {
         const spinner = this.page.locator(EmployeeLocators.loadingSpinner);
@@ -37,10 +48,7 @@ export class EmployeeActions {
             // No hint dropdown
         }
 
-        await this.page
-            .locator(EmployeeLocators.searchButton)
-            .first()
-            .click();
+        await this.page.locator(EmployeeLocators.searchButton).first().click();
         await this.waitForSpinner();
         await this.page
             .locator(".oxd-table-body")

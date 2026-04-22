@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
-import { ClaimPage } from "../pages/dashboard/ClaimPage";
-import { EventPage } from "../pages/dashboard/EventPage";
+import { ClaimPage } from "../pages/claim/ClaimPage";
+import { EventPage } from "../pages/event/EventPage";
 
 /**
  * Project-specific setup helper to create a claim.
@@ -24,11 +24,12 @@ export async function createClaimWithEvent(
 export async function deleteClaimAndEvent(
     page: Page,
     eventName: string,
+    remarks?: string,
 ): Promise<void> {
     const claimPage = new ClaimPage(page);
-    // Attempt claim deletion (might be disabled by UI limitations)
+    // Attempt claim deletion (uses hybrid UI/DB fallback)
     await claimPage
-        .delete(eventName)
+        .delete(eventName, remarks)
         .catch((err) =>
             console.warn(
                 `Claim cleanup failed (expected for initiated claims): ${err}`,

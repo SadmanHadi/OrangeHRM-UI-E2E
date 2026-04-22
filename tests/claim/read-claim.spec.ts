@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { ClaimPage } from "../../src/pages/dashboard/ClaimPage";
+import { ClaimPage } from "../../src/pages/claim/ClaimPage";
 import { uniqueName } from "../../src/utils/timestamp";
 import {
     createClaimWithEvent,
@@ -26,8 +26,8 @@ test.describe("Claim (Self) - Read", () => {
     });
 
     test.afterEach(async ({ page }) => {
-        // Cleanup: Remove both claim and event dependencies
-        await deleteClaimAndEvent(page, eventName);
+        // Cleanup: Remove both claim and event dependencies using hybrid delete
+        await deleteClaimAndEvent(page, eventName, remarks);
     });
 
     test("should find the newly created claim in the My Claims list and view details", async ({
