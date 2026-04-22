@@ -27,6 +27,8 @@ const is_headless = /^(1|true|yes|on)$/i.test(
 
 export default defineConfig({
     testDir: "../tests",
+    /* Output for traces, videos, and screenshots relative to root */
+    outputDir: path.resolve(__dirname, "..", "test-results"),
 
     /* One-time login + server health-check before all tests */
     globalSetup: "./global-setup.ts",
@@ -50,7 +52,13 @@ export default defineConfig({
             "monocart-reporter",
             {
                 name: "OrangeHRM E2E Bootcamp",
-                outputFile: "./playwright-report/monocart/index.html",
+                outputFile: path.resolve(
+                    __dirname,
+                    "..",
+                    "playwright-report",
+                    "monocart",
+                    "index.html",
+                ),
                 metadata: {
                     Project: "OrangeHRM UI E2E",
                     Environment: process.env.BASE_URL || "Local Docker",
@@ -59,8 +67,29 @@ export default defineConfig({
                 },
             },
         ],
-        ["html", { outputFolder: "playwright-report/html", open: "never" }],
-        ["json", { outputFile: "playwright-report/results.json" }],
+        [
+            "html",
+            {
+                outputFolder: path.resolve(
+                    __dirname,
+                    "..",
+                    "playwright-report",
+                    "html",
+                ),
+                open: "never",
+            },
+        ],
+        [
+            "json",
+            {
+                outputFile: path.resolve(
+                    __dirname,
+                    "..",
+                    "playwright-report",
+                    "results.json",
+                ),
+            },
+        ],
         ["list"],
     ],
 
