@@ -33,13 +33,13 @@ The framework uses `.env` files for secure configuration. **Never commit your `.
 
 ```bash
 # Create your local environment file
-cp .env.example .env
+cp configs/.env.example configs/.env
 ```
 
-Open `.env` and configure the following:
+Open `configs/.env` and configure the following:
 
 - `BASE_URL`: The local URL where OrangeHRM will run (default: `http://localhost`).
-- `ADMIN_USERNAME`: Default admin username (e.g., `Admin`).
+- `ADMIN_USERNAME`: Default admin username (e.g., `admin`).
 - `ADMIN_PASSWORD`: Strong password for the admin account (must meet 5.8.1 requirements).
 - `DB_ROOT_PASSWORD`, `DB_PASSWORD`: Database credentials for the MariaDB container.
 
@@ -78,16 +78,16 @@ pnpm run stop:orangehrm
 The project is organized by module to ensure scalability and maintainability:
 
 ```text
-src/pages/
-  ├── [module]/              # e.g., employee, leave-type, event, claim
-  │   ├── actions/           # Module-specific action methods (create, update, delete, etc.)
-  │   ├── locators/          # Module-specific locator constants
-  │   └── [Module]Page.ts    # Main page object (re-exports actions)
-  ├── base/                  # BasePage with shared utilities
-  └── login/                 # Shared Login module
-tests/                       # Atomic CRUD test files organized by module
-src/setup/                   # Project-specific setup/cleanup helpers
-scripts/                     # Server automation and installer scripts (TypeScript)
+pages/               # Page Object Models
+  ├── [module]/      # e.g., employee, leave-type, event, claim
+  │   ├── actions/   # Module-specific action methods
+  │   ├── locators/  # Module-specific locator constants
+  │   └── Page.ts    # Main page object
+tests/               # Atomic test files
+setups/              # Project-specific setup/cleanup helpers (login, create entity)
+utils/               # Generic reusable utilities (non-project-specific)
+scripts/             # Server start/stop automation (TypeScript)
+configs/             # Playwright + environment configs
 ```
 
 ---

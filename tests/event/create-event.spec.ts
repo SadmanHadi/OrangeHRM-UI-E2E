@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { EventPage } from "../../src/pages/event/EventPage";
-import { uniqueName } from "../../src/utils/timestamp";
-import { createEvent, deleteEvent } from "../../src/setup/event.setup";
-import { expectTableRowVisible } from "../../src/utils/dashboard/table_assertions";
+import { EventPage } from "../../pages/event/EventPage";
+import { uniqueName } from "../../utils/timestamp";
+import { createEvent, deleteEvent } from "../../setups/event.setup";
+import { expectTableRowVisible } from "../../utils/dashboard/table_assertions";
 
 test.describe("Event - Create", () => {
     let name: string;

@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
-import { ClaimPage } from "../../src/pages/claim/ClaimPage";
-import { uniqueName } from "../../src/utils/timestamp";
+import { ClaimPage } from "../../pages/claim/ClaimPage";
+import { uniqueName } from "../../utils/timestamp";
 import {
     createClaimWithEvent,
     deleteClaimAndEvent,
-} from "../../src/setup/claim.setup";
+} from "../../setups/claim.setup";
 import {
     expectTableRowContains,
     expectTableRowVisible,
-} from "../../src/utils/dashboard/table_assertions";
-import { expectVisible, getTableRowByText } from "../../src/utils/common";
+} from "../../utils/dashboard/table_assertions";
+import { expectVisible, getTableRowByText } from "../../utils/common";
 
 test.describe("Claim (Self) - Read", () => {
     test.setTimeout(120000);

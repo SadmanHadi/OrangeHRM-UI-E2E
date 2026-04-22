@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { EmployeePage } from "../../src/pages/employee/EmployeePage";
-import { uniqueName } from "../../src/utils/timestamp";
-import { createEmployee, deleteEmployee } from "../../src/setup/employee.setup";
+import { EmployeePage } from "../../pages/employee/EmployeePage";
+import { uniqueName } from "../../utils/timestamp";
+import { createEmployee, deleteEmployee } from "../../setups/employee.setup";
 
 test.describe("Employee - Create", () => {
     test.setTimeout(120000); // 2 minutes for slow environment

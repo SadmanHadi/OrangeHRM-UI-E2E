@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { EmployeePage } from "../../src/pages/employee/EmployeePage";
-import { uniqueName } from "../../src/utils/timestamp";
-import { createEmployee } from "../../src/setup/employee.setup";
-import { expectTableRowHidden } from "../../src/utils/dashboard/table_assertions";
+import { EmployeePage } from "../../pages/employee/EmployeePage";
+import { uniqueName } from "../../utils/timestamp";
+import { createEmployee } from "../../setups/employee.setup";
+import { expectTableRowHidden } from "../../utils/dashboard/table_assertions";
 
 test.describe("Employee - Delete", () => {
     let firstName: string;

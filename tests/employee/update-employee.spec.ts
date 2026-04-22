@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { EmployeePage } from "../../src/pages/employee/EmployeePage";
-import { uniqueName } from "../../src/utils/timestamp";
-import { createEmployee, deleteEmployee } from "../../src/setup/employee.setup";
-import { expectVisible, getTableRowByText } from "../../src/utils/common";
+import { EmployeePage } from "../../pages/employee/EmployeePage";
+import { uniqueName } from "../../utils/timestamp";
+import { createEmployee, deleteEmployee } from "../../setups/employee.setup";
+import { expectVisible, getTableRowByText } from "../../utils/common";
 
 test.describe("Employee - Update", () => {
     let firstName: string;

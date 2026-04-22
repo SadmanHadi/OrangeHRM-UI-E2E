@@ -31,6 +31,10 @@ export default [
             "src/**/*.ts",
             "tests/**/*.ts",
             "scripts/**/*.ts",
+            "utils/**/*.ts",
+            "pages/**/*.ts",
+            "setups/**/*.ts",
+            "configs/**/*.ts",
             "global-setup.ts",
             "global-teardown.ts",
             "playwright.config.ts",
@@ -203,7 +207,7 @@ export default [
         },
     },
     {
-        files: ["src/pages/**/*.ts", "src/utils/**/*.ts"],
+        files: ["pages/**/*.ts", "utils/**/*.ts"],
         rules: {
             "playwright/no-raw-locators": "off",
         },

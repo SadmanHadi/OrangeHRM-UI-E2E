@@ -1,8 +1,8 @@
 # Project Structure
 
 - `src/pages/`: Page Object Models organized by module (claim, employee, event, leave-type, login).
-  - `actions/`: Business logic and interactions.
-  - `locators/`: UI selectors.
+    - `actions/`: Business logic and interactions.
+    - `locators/`: UI selectors.
 - `tests/`: Atomic test files organized by module.
 - `src/setup/`: Project-specific data setup and cleanup functions.
 - `src/utils/`: Generic reusable utilities (common, database).

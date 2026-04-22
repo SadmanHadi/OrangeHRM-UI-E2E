@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { EmployeePage } from "../../src/pages/employee/EmployeePage";
-import { uniqueName } from "../../src/utils/timestamp";
-import { createEmployee, deleteEmployee } from "../../src/setup/employee.setup";
+import { EmployeePage } from "../../pages/employee/EmployeePage";
+import { uniqueName } from "../../utils/timestamp";
+import { createEmployee, deleteEmployee } from "../../setups/employee.setup";
 import {
     expectTableRowContains,
     expectTableRowVisible,
-} from "../../src/utils/dashboard/table_assertions";
+} from "../../utils/dashboard/table_assertions";
 
 test.describe("Employee - Read", () => {
     let firstName: string;

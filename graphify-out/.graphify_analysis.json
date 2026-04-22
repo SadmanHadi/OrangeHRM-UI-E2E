@@ -1,0 +1,448 @@
+{
+  "communities": {
+    "0": [
+      "claim_setup_createclaimwithevent",
+      "claim_setup_deleteclaimandevent",
+      "employee_setup_createemployee",
+      "employee_setup_deleteemployee",
+      "event_setup_createevent",
+      "event_setup_deleteevent",
+      "leave_type_setup_createleavetype",
+      "leave_type_setup_deleteleavetype",
+      "leavetypeactions_leavetypeactions",
+      "leavetypeactions_leavetypeactions_constructor",
+      "leavetypeactions_leavetypeactions_create",
+      "leavetypeactions_leavetypeactions_delete",
+      "leavetypeactions_leavetypeactions_navigate",
+      "leavetypeactions_leavetypeactions_read",
+      "leavetypeactions_leavetypeactions_update",
+      "src_pages_leave_type_actions_leavetypeactions_ts",
+      "src_setup_claim_setup_ts",
+      "src_setup_employee_setup_ts",
+      "src_setup_event_setup_ts",
+      "src_setup_leave_type_setup_ts"
+    ],
+    "1": [
+      "employeeactions_employeeactions",
+      "employeeactions_employeeactions_constructor",
+      "employeeactions_employeeactions_create",
+      "employeeactions_employeeactions_delete",
+      "employeeactions_employeeactions_navigate",
+      "employeeactions_employeeactions_read",
+      "employeeactions_employeeactions_search",
+      "employeeactions_employeeactions_update",
+      "employeeactions_employeeactions_waitforspinner",
+      "loginpage_loginpage",
+      "loginpage_loginpage_constructor",
+      "loginpage_loginpage_goto",
+      "loginpage_loginpage_login",
+      "scripts_ui_installer_ts",
+      "src_pages_employee_actions_employeeactions_ts",
+      "src_pages_login_loginpage_ts",
+      "ui_installer_runinstaller"
+    ],
+    "2": [
+      "global_setup_ensureconffileincontainer",
+      "global_setup_globalsetup",
+      "global_setup_isdatabaseschemaready",
+      "global_setup_sleep",
+      "global_setup_ts",
+      "global_setup_waitforcontainersready",
+      "global_setup_waitforloginrouteready",
+      "global_teardown_globalteardown",
+      "global_teardown_ts",
+      "scripts_start_orangehrm_ts",
+      "scripts_stop_orangehrm_ts",
+      "start_orangehrm_startorangehrm",
+      "stop_orangehrm_stoporangehrm"
+    ],
+    "3": [
+      "claimactions_claimactions",
+      "claimactions_claimactions_cancel",
+      "claimactions_claimactions_constructor",
+      "claimactions_claimactions_delete",
+      "claimactions_claimactions_navigate",
+      "claimactions_claimactions_read",
+      "claimactions_claimactions_update",
+      "claimactions_claimactions_viewdetails",
+      "database_utils_databaseutils",
+      "database_utils_databaseutils_deleteclaimbyname",
+      "database_utils_databaseutils_executesql",
+      "src_pages_claim_actions_claimactions_ts",
+      "src_utils_common_database_utils_ts"
+    ],
+    "4": [
+      "base_basepage",
+      "base_basepage_clickbuttonbyname",
+      "base_basepage_constructor",
+      "base_basepage_getinputbylabel",
+      "base_basepage_gettablerowbytext",
+      "base_basepage_gettextareabylabel",
+      "base_basepage_gotoandwait",
+      "base_basepage_selectdropdownbylabel",
+      "base_basepage_waitforform",
+      "base_basepage_waitforlayout",
+      "base_basepage_waitfortablerowvisible",
+      "base_basepage_waitfortoastsuccess",
+      "src_pages_login_base_ts"
+    ],
+    "5": [
+      "eventactions_eventactions",
+      "eventactions_eventactions_constructor",
+      "eventactions_eventactions_create",
+      "eventactions_eventactions_delete",
+      "eventactions_eventactions_navigate",
+      "eventactions_eventactions_read",
+      "eventactions_eventactions_searchbyname",
+      "eventactions_eventactions_update",
+      "locator_utils_getinputbylabel",
+      "src_pages_event_actions_eventactions_ts"
+    ],
+    "6": [
+      "claimactions_claimactions_create",
+      "locator_utils_gettablerowbytext",
+      "locator_utils_gettextareabylabel",
+      "src_utils_common_locator_utils_ts",
+      "src_utils_dashboard_table_assertions_ts",
+      "table_assertions_expecttablerowcontains",
+      "table_assertions_expecttablerowhidden",
+      "table_assertions_expecttablerowvisible"
+    ],
+    "7": [
+      "expect_utils_expecthidden",
+      "expect_utils_expectpolltobe",
+      "expect_utils_expectvisible",
+      "src_utils_common_expect_utils_ts",
+      "src_utils_common_sync_utils_ts",
+      "sync_utils_waitforlocatorenabled",
+      "sync_utils_waitfortablerowvisible"
+    ],
+    "8": [
+      "dashboard_dashboardpage",
+      "dashboard_dashboardpage_constructor",
+      "dashboard_dashboardpage_isvisible",
+      "dashboard_dashboardpage_navigate",
+      "src_pages_dashboard_ts"
+    ],
+    "9": [
+      "click_utils_boxedstep",
+      "click_utils_safeclick",
+      "click_utils_safeclick2",
+      "src_utils_actions_click_utils_ts"
+    ],
+    "10": [
+      "logger_logerror",
+      "logger_logstep",
+      "logger_logsuccess",
+      "src_utils_logging_logger_ts"
+    ],
+    "11": [
+      "readme_github_actions",
+      "readme_monocart_reporter",
+      "readme_orangehrm",
+      "readme_playwright"
+    ],
+    "12": [
+      "src_utils_actions_wait_utils_ts",
+      "wait_utils_boxedstep",
+      "wait_utils_waitforpagestability"
+    ],
+    "13": [
+      "data_utils_randomstring",
+      "data_utils_uniquesuffix",
+      "src_utils_common_data_utils_ts"
+    ],
+    "14": [
+      "src_utils_timestamp_ts",
+      "timestamp_uniquename"
+    ],
+    "15": [
+      "network_utils_waitforresponsecontaining",
+      "src_utils_common_network_utils_ts"
+    ],
+    "16": [
+      "readme_pom",
+      "readme_setup_function_pattern"
+    ],
+    "17": [
+      "readme_atomic_tests",
+      "readme_parallel_execution"
+    ],
+    "18": [
+      "eslint_config_mjs"
+    ],
+    "19": [
+      "playwright_config_ts"
+    ],
+    "20": [
+      "graphify_out_extract_ast_py"
+    ],
+    "21": [
+      "src_pages_claim_claimpage_ts"
+    ],
+    "22": [
+      "src_pages_claim_locators_claimlocators_ts"
+    ],
+    "23": [
+      "src_pages_employee_employeepage_ts"
+    ],
+    "24": [
+      "src_pages_employee_locators_employeelocators_ts"
+    ],
+    "25": [
+      "src_pages_event_eventpage_ts"
+    ],
+    "26": [
+      "src_pages_event_locators_eventlocators_ts"
+    ],
+    "27": [
+      "src_pages_leave_type_leavetypepage_ts"
+    ],
+    "28": [
+      "src_pages_leave_type_locators_leavetypelocators_ts"
+    ],
+    "29": [
+      "src_utils_common_index_ts"
+    ],
+    "30": [
+      "src_utils_login_login_selectors_ts"
+    ],
+    "31": [
+      "tests_claim_create_claim_spec_ts"
+    ],
+    "32": [
+      "tests_claim_delete_claim_spec_ts"
+    ],
+    "33": [
+      "tests_claim_read_claim_spec_ts"
+    ],
+    "34": [
+      "tests_claim_update_claim_spec_ts"
+    ],
+    "35": [
+      "tests_employee_create_employee_spec_ts"
+    ],
+    "36": [
+      "tests_employee_delete_employee_spec_ts"
+    ],
+    "37": [
+      "tests_employee_read_employee_spec_ts"
+    ],
+    "38": [
+      "tests_employee_update_employee_spec_ts"
+    ],
+    "39": [
+      "tests_event_create_event_spec_ts"
+    ],
+    "40": [
+      "tests_event_delete_event_spec_ts"
+    ],
+    "41": [
+      "tests_event_read_event_spec_ts"
+    ],
+    "42": [
+      "tests_event_update_event_spec_ts"
+    ],
+    "43": [
+      "tests_leave_type_create_leave_type_spec_ts"
+    ],
+    "44": [
+      "tests_leave_type_delete_leave_type_spec_ts"
+    ],
+    "45": [
+      "tests_leave_type_read_leave_type_spec_ts"
+    ],
+    "46": [
+      "tests_leave_type_update_leave_type_spec_ts"
+    ],
+    "47": [
+      "readme_env_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.14,
+    "1": 0.21,
+    "2": 0.26,
+    "3": 0.23,
+    "4": 0.17,
+    "5": 0.4,
+    "6": 0.32,
+    "7": 0.33,
+    "8": 0.4,
+    "9": 0.83,
+    "10": 0.5,
+    "11": 0.5,
+    "12": 1.0,
+    "13": 0.67,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0
+  },
+  "gods": [
+    {
+      "id": "base_basepage",
+      "label": "BasePage",
+      "degree": 12
+    },
+    {
+      "id": "global_setup_globalsetup",
+      "label": "globalSetup()",
+      "degree": 9
+    },
+    {
+      "id": "claimactions_claimactions",
+      "label": "ClaimActions",
+      "degree": 9
+    },
+    {
+      "id": "employeeactions_employeeactions",
+      "label": "EmployeeActions",
+      "degree": 9
+    },
+    {
+      "id": "eventactions_eventactions",
+      "label": "EventActions",
+      "degree": 8
+    },
+    {
+      "id": "leavetypeactions_leavetypeactions",
+      "label": "LeaveTypeActions",
+      "degree": 7
+    },
+    {
+      "id": "locator_utils_getinputbylabel",
+      "label": "getInputByLabel()",
+      "degree": 7
+    },
+    {
+      "id": "global_setup_sleep",
+      "label": "sleep()",
+      "degree": 5
+    },
+    {
+      "id": "global_setup_waitforloginrouteready",
+      "label": "waitForLoginRouteReady()",
+      "degree": 5
+    },
+    {
+      "id": "dashboard_dashboardpage",
+      "label": "DashboardPage",
+      "degree": 4
+    }
+  ],
+  "surprises": [
+    {
+      "source": "globalSetup()",
+      "target": "startOrangeHRM()",
+      "source_files": [
+        "global-setup.ts",
+        "scripts\\start-orangehrm.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; peripheral node `startOrangeHRM()` unexpectedly reaches hub `globalSetup()`"
+    },
+    {
+      "source": "globalSetup()",
+      "target": "stopOrangeHRM()",
+      "source_files": [
+        "global-setup.ts",
+        "scripts\\stop-orangehrm.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "globalTeardown()",
+      "target": "stopOrangeHRM()",
+      "source_files": [
+        "global-teardown.ts",
+        "scripts\\stop-orangehrm.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "waitForLocatorEnabled()",
+      "target": "expectPollToBe()",
+      "source_files": [
+        "src\\utils\\common\\sync_utils.ts",
+        "src\\utils\\common\\expect_utils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "waitForTableRowVisible()",
+      "target": "expectVisible()",
+      "source_files": [
+        "src\\utils\\common\\sync_utils.ts",
+        "src\\utils\\common\\expect_utils.ts"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `globalSetup()` connect `Community 2` to `Community 1`?",
+      "why": "High betweenness centrality (0.064) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `getInputByLabel()` connect `Community 5` to `Community 0`, `Community 1`, `Community 6`?",
+      "why": "High betweenness centrality (0.044) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 4 inferred relationships involving `globalSetup()` (e.g. with `startOrangeHRM()` and `.goto()`) actually correct?",
+      "why": "`globalSetup()` has 4 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `OrangeHRM`, `Setup Function Pattern`, `Page Object Model (POM)` to the rest of the system?",
+      "why": "8 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.14 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

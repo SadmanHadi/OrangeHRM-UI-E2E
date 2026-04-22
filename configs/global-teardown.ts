@@ -1,3 +1,5 @@
+import { stopOrangeHRM } from "../scripts/stop-orangehrm";
+
 /**
  * global-teardown.ts
  * Runs after all tests complete.
@@ -7,10 +9,7 @@ async function globalTeardown() {
         "[global-teardown] All tests finished. Stopping OrangeHRM via Docker Compose...",
     );
     try {
-        // stopOrangeHRM();
-        console.log(
-            "[global-teardown] Cleanup skipped to preserve environment state.",
-        );
+        stopOrangeHRM();
     } catch (error: any) {
         console.error(
             "[global-teardown] Error during Docker cleanup:",

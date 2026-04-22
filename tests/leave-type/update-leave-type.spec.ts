@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
-import { LeaveTypePage } from "../../src/pages/leave-type/LeaveTypePage";
-import { uniqueName } from "../../src/utils/timestamp";
+import { LeaveTypePage } from "../../pages/leave-type/LeaveTypePage";
+import { uniqueName } from "../../utils/timestamp";
 import {
     createLeaveType,
     deleteLeaveType,
-} from "../../src/setup/leave-type.setup";
-import { expectTableRowVisible } from "../../src/utils/dashboard/table_assertions";
+} from "../../setups/leave-type.setup";
+import { expectTableRowVisible } from "../../utils/dashboard/table_assertions";
 
 test.describe("Leave Type - Update", () => {
     let name: string;

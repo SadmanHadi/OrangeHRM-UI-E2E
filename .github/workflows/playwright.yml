@@ -63,38 +63,34 @@ jobs:
 
             # ── Run UI tests (parallel via matrix) ─────────────────────────────────
             - name: Run E2E tests
-              run: pnpm exec playwright test --project=${{ matrix.project }}
+              run: pnpm exec playwright test --config=configs/playwright.config.ts --project=${{ matrix.project }}
               env:
                   CI: "true"
                   HEADLESS: "true"
 
-            - name: Upload Playwright Reports (HTML/JSON)
+            - name: Upload Monocart HTML Report
               if: always()
               uses: actions/upload-artifact@v4
               with:
-                  name: playwright-report-${{ matrix.project }}
-                  path: playwright-report/
+                  name: monocart-report-${{ matrix.project }}
+                  path: playwright-report/monocart/
                   retention-days: 30
-                  if-no-files-found: ignore
 
-            - name: Upload Test Traces
-              if: always()
+            - name: Upload Playwright Trace on Failure
+              if: failure()
               uses: actions/upload-artifact@v4
               with:
                   name: playwright-traces-${{ matrix.project }}
                   path: test-results/
                   retention-days: 30
-                  if-no-files-found: ignore
 
-            - name: Upload Installation Artifacts (Screenshots/Logs)
+            - name: Upload Test Results (JSON)
               if: always()
               uses: actions/upload-artifact@v4
               with:
-                  name: installation-artifacts-${{ matrix.project }}
-                  path: |
-                      scripts/artifacts/screenshots/
+                  name: test-results-json-${{ matrix.project }}
+                  path: playwright-report/results.json
                   retention-days: 30
-                  if-no-files-found: ignore
 
             - name: Stop OrangeHRM server
               if: always()

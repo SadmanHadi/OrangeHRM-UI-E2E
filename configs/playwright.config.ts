@@ -13,6 +13,7 @@ if (!process.env.BASE_URL && !process.env.CI) {
 
 const AUTH_FILE = path.resolve(
     __dirname,
+    "..",
     "artifacts",
     "auth",
     "storageState.json",
@@ -23,7 +24,7 @@ const is_headless = /^(1|true|yes|on)$/i.test(
 );
 
 export default defineConfig({
-    testDir: "./tests",
+    testDir: "../tests",
 
     /* One-time login + server health-check before all tests */
     globalSetup: "./global-setup.ts",

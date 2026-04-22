@@ -4,11 +4,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "playwright test",
-        "test:ui": "playwright test --ui",
+        "test": "playwright test --config=configs/playwright.config.ts",
+        "test:ui": "playwright test --config=configs/playwright.config.ts --ui",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "lint": "eslint . --ext .ts",
+        "lint": "eslint .",
         "start:orangehrm": "tsx scripts/start-orangehrm.ts",
         "stop:orangehrm": "tsx scripts/stop-orangehrm.ts"
     },

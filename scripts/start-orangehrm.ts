@@ -1,8 +1,18 @@
 import { execSync } from "child_process";
 
+/**
+ * Starts the OrangeHRM and MariaDB containers using Docker Compose.
+ * Uses --remove-orphans to ensure a clean state.
+ */
 export function startOrangeHRM(): void {
     console.log("[start-orangehrm] Starting OrangeHRM via Docker Compose...");
-    execSync("docker compose up -d ohrm-db orangehrm", { stdio: "inherit" });
+    try {
+        execSync("docker compose up -d --remove-orphans", { stdio: "inherit" });
+    } catch (error: any) {
+        console.warn(
+            `[start-orangehrm] Warning: docker compose up failed: ${error.message}`,
+        );
+    }
 }
 
 if (require.main === module) {

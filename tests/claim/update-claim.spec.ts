@@ -1,14 +1,14 @@
 import { test } from "@playwright/test";
-import { ClaimPage } from "../../src/pages/claim/ClaimPage";
-import { uniqueName } from "../../src/utils/timestamp";
+import { ClaimPage } from "../../pages/claim/ClaimPage";
+import { uniqueName } from "../../utils/timestamp";
 import {
     createClaimWithEvent,
     deleteClaimAndEvent,
-} from "../../src/setup/claim.setup";
+} from "../../setups/claim.setup";
 import {
     expectTableRowContains,
     expectTableRowVisible,
-} from "../../src/utils/dashboard/table_assertions";
+} from "../../utils/dashboard/table_assertions";
 
 test.describe("Claim (Self) - Update", () => {
     test.setTimeout(120000);
