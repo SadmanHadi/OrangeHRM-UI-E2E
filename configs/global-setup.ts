@@ -1,3 +1,4 @@
+/* eslint-disable playwright/no-raw-locators, playwright/no-wait-for-selector */
 import { chromium, FullConfig } from "@playwright/test";
 import { execSync } from "child_process";
 import dotenv from "dotenv";
@@ -181,15 +182,22 @@ async function waitForLoginRouteReady(
 }
 
 async function globalSetup(config: FullConfig) {
-    dotenv.config({ override: true });
-    const { baseURL, storageState } = config.projects[0].use;
+    // Load root .env first (CI writes here), then configs/.env overrides for local dev
+    dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
+    dotenv.config({ path: path.resolve(__dirname, ".env"), override: true });
+
+    const baseURL =
+        process.env.BASE_URL ||
+        config.projects[0].use.baseURL ||
+        "http://localhost";
+    const { storageState } = config.projects[0].use;
     const AUTH_FILE =
         typeof storageState === "string" ? storageState : "storageState.json";
     const username = process.env.ADMIN_USERNAME || "admin";
     const password = process.env.ADMIN_PASSWORD || "Admin@123456#";
 
     console.log(
-        "[global-setup] Env presence { BASE_URL: true, ADMIN_USERNAME: true, ADMIN_PASSWORD: true }",
+        `[global-setup] Env { BASE_URL: ${baseURL}, ADMIN_USERNAME: ${username ? "set" : "missing"} }`,
     );
     console.log(
         "[global-setup] Ensuring OrangeHRM is running via Docker Compose...",
@@ -213,7 +221,7 @@ async function globalSetup(config: FullConfig) {
                 console.log("[global-setup] OrangeHRM is already healthy.");
             }
         }
-    } catch (e) {
+    } catch {
         // proceed to start
     }
 

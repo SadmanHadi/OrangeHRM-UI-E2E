@@ -219,7 +219,7 @@ export default [
         },
     },
     {
-        files: ["playwright.config.ts"],
+        files: ["**/playwright.config.ts"],
         rules: {
             "playwright/require-hook": "off",
         },

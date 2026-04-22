@@ -1,3 +1,4 @@
+/* eslint-disable playwright/no-raw-locators, playwright/no-wait-for-timeout, playwright/no-wait-for-selector, playwright/require-hook */
 import { chromium } from "@playwright/test";
 import { execSync } from "child_process";
 import * as dotenv from "dotenv";
@@ -10,7 +11,7 @@ async function install() {
     const baseURL = process.env.BASE_URL || "http://localhost";
     const dbHost = process.env.DB_HOST || "ohrm-db";
     const dbName = process.env.DB_NAME || "orangehrm";
-    const dbUser = "root"; // Use root for installation to ensure DB creation
+    // const dbUser = "root"; // Unused in this script
     const dbPass = process.env.DB_ROOT_PASSWORD || "Root123";
     const adminUser = process.env.ADMIN_USERNAME || "admin";
     const adminPass = process.env.ADMIN_PASSWORD || "Admin@123456#";
@@ -180,7 +181,7 @@ async function install() {
                                 `[ui-installer] ✓ DB ${dbName} verified.`,
                             );
                         }
-                    } catch (e) {
+                    } catch {
                         console.warn(
                             "[ui-installer] Warning: Failed to verify DB via CLI, but UI moved forward.",
                         );
@@ -341,7 +342,9 @@ async function install() {
 
         console.log("[ui-installer] ✓ Installation completed successfully.");
     } catch (error) {
-        console.error(`[ui-installer] ✗ Installation failed: ${error.message}`);
+        const errorMessage =
+            error instanceof Error ? error.message : String(error);
+        console.error(`[ui-installer] ✗ Installation failed: ${errorMessage}`);
         // ... (rest of catch)
         const screenshotDir = path.join(__dirname, "artifacts", "screenshots");
         if (!fs.existsSync(screenshotDir)) {

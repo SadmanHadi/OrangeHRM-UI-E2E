@@ -2,10 +2,12 @@ import { defineConfig, devices } from "@playwright/test";
 import dotenv from "dotenv";
 import path from "path";
 
+// Load root .env first (CI writes here via workflow), then configs/.env overrides for local dev
+dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 dotenv.config({ path: path.resolve(__dirname, ".env"), override: true });
 
 // Check for critical variables to prevent instant worker failure
-if (!process.env.BASE_URL && !process.env.CI) {
+if (!process.env.BASE_URL) {
     console.warn(
         "[Playwright Config] Warning: BASE_URL is not set. Environment injection may have failed.",
     );
