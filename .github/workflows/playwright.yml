@@ -50,6 +50,9 @@ jobs:
                   echo "DB_USER=orangehrm" >> .env
                   echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
                   echo "HEADLESS=true" >> .env
+                  echo "DB_HOST=ohrm-db" >> .env
+                  echo "DB_PORT=3306" >> .env
+                  echo "ORANGEHRM_PORT=80" >> .env
 
             # ── Playwright browsers ─────────────────────────────────────────────────
             - name: Install Playwright browsers
