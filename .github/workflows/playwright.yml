@@ -1,82 +1,101 @@
 name: OrangeHRM E2E Tests
 
 on:
-  push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
-  workflow_dispatch: {}
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+    workflow_dispatch: {}
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    timeout-minutes: 60
-    strategy:
-      fail-fast: false
-      matrix:
-        project: [chromium, firefox, webkit, edge]
+    test:
+        runs-on: ubuntu-latest
+        timeout-minutes: 60
+        strategy:
+            fail-fast: false
+            matrix:
+                project: [chromium, firefox, webkit, edge]
 
-    steps:
-      # ── Checkout ───────────────────────────────────────────────────────────
-      - uses: actions/checkout@v4
+        steps:
+            # ── Checkout ───────────────────────────────────────────────────────────
+            - uses: actions/checkout@v4
 
-      # ── Node.js ────────────────────────────────────────────────────────────
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
+            # ── Node.js ────────────────────────────────────────────────────────────
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: lts/*
 
-      # ── pnpm ───────────────────────────────────────────────────────────────
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: false
+            # ── pnpm ───────────────────────────────────────────────────────────────
+            - uses: pnpm/action-setup@v4
+              with:
+                  run_install: false
 
-      # ── Dependencies ───────────────────────────────────────────────────────
-      - name: Install dependencies
-        run: pnpm install
+            # ── Dependencies ───────────────────────────────────────────────────────
+            - name: Install dependencies
+              run: pnpm install
 
-      # ── Playwright browsers ─────────────────────────────────────────────────
-      - name: Install Playwright browsers
-        run: |
-          BROWSER="${{ matrix.project }}"
-          if [ "$BROWSER" = "edge" ]; then BROWSER="msedge"; fi
-          pnpm exec playwright install chromium $BROWSER --with-deps
+            - name: Lint
+              run: pnpm run lint
 
-      # ── Run UI tests (parallel via matrix) ─────────────────────────────────
-      - name: Run E2E tests
-        run: pnpm exec playwright test --project=${{ matrix.project }}
-        env:
-          CI: 'true'
-          BASE_URL: ${{ secrets.BASE_URL }}
-          ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          HEADLESS: 'true'
-          # Pass DB password for installation script if needed by Playwright
-          DB_ROOT_PASSWORD: root_password
+            - name: Prettier check
+              run: pnpm run format:check
 
-      - name: Upload Playwright Reports (HTML/JSON)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report-${{ matrix.project }}
-          path: playwright-report/
-          retention-days: 30
-          if-no-files-found: ignore
+            - name: Create .env for CI
+              run: |
+                  echo "BASE_URL=http://localhost" >> .env
+                  echo "ADMIN_USERNAME=${{ secrets.ADMIN_USERNAME }}" >> .env
+                  echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> .env
+                  echo "DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }}" >> .env
+                  echo "DB_NAME=orangehrm" >> .env
+                  echo "DB_USER=orangehrm" >> .env
+                  echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+                  echo "HEADLESS=true" >> .env
 
-      - name: Upload Test Traces
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-traces-${{ matrix.project }}
-          path: test-results/
-          retention-days: 30
-          if-no-files-found: ignore
+            # ── Playwright browsers ─────────────────────────────────────────────────
+            - name: Install Playwright browsers
+              run: |
+                  BROWSER="${{ matrix.project }}"
+                  if [ "$BROWSER" = "edge" ]; then BROWSER="msedge"; fi
+                  pnpm exec playwright install chromium $BROWSER --with-deps
 
-      - name: Upload Installation Artifacts (Screenshots/Logs)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: installation-artifacts-${{ matrix.project }}
-          path: |
-            scripts/artifacts/screenshots/
-          retention-days: 30
-          if-no-files-found: ignore
+            - name: Start OrangeHRM server
+              run: pnpm run start:orangehrm
+
+            # ── Run UI tests (parallel via matrix) ─────────────────────────────────
+            - name: Run E2E tests
+              run: pnpm exec playwright test --project=${{ matrix.project }}
+              env:
+                  CI: "true"
+                  HEADLESS: "true"
+
+            - name: Upload Playwright Reports (HTML/JSON)
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-report-${{ matrix.project }}
+                  path: playwright-report/
+                  retention-days: 30
+                  if-no-files-found: ignore
+
+            - name: Upload Test Traces
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-traces-${{ matrix.project }}
+                  path: test-results/
+                  retention-days: 30
+                  if-no-files-found: ignore
+
+            - name: Upload Installation Artifacts (Screenshots/Logs)
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: installation-artifacts-${{ matrix.project }}
+                  path: |
+                      scripts/artifacts/screenshots/
+                  retention-days: 30
+                  if-no-files-found: ignore
+
+            - name: Stop OrangeHRM server
+              if: always()
+              run: pnpm run stop:orangehrm

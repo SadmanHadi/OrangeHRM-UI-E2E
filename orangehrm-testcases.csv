@@ -1,0 +1,17 @@
+TestCaseID,TestCaseScenario,TestCaseSteps,TestCaseStatus
+TC_EMP_001,Create Employee,"1. Login 2. Navigate to PIM 3. Add employee with unique first and last name 4. Save 5. Verify personal details reflect saved data 6. Verify employee appears in list",Not Executed
+TC_EMP_002,Read Employee,"1. Login 2. Navigate to PIM 3. Search for existing employee by name 4. Verify employee row contains expected name",Not Executed
+TC_EMP_003,Update Employee,"1. Login 2. Navigate to PIM 3. Open existing employee 4. Edit last name 5. Save 6. Verify updated name appears in details and list",Not Executed
+TC_EMP_004,Delete Employee,"1. Login 2. Navigate to PIM 3. Search for existing employee 4. Delete employee 5. Confirm deletion 6. Verify employee no longer appears in list",Not Executed
+TC_LVT_001,Create Leave Type,"1. Login 2. Navigate to Leave Types 3. Add leave type with unique name 4. Save 5. Verify leave type appears in list",Not Executed
+TC_LVT_002,Read Leave Type,"1. Login 2. Navigate to Leave Types 3. Search for existing leave type 4. Verify leave type row is visible",Not Executed
+TC_LVT_003,Update Leave Type,"1. Login 2. Navigate to Leave Types 3. Edit existing leave type name 4. Save 5. Verify updated name appears in list",Not Executed
+TC_LVT_004,Delete Leave Type,"1. Login 2. Navigate to Leave Types 3. Select leave type 4. Delete 5. Confirm deletion 6. Verify leave type is removed",Not Executed
+TC_EVT_001,Create Event,"1. Login 2. Navigate to Claim Events 3. Add event with unique name 4. Save 5. Verify event appears in list",Not Executed
+TC_EVT_002,Read Event,"1. Login 2. Navigate to Claim Events 3. Search for existing event 4. Verify event row is visible",Not Executed
+TC_EVT_003,Update Event,"1. Login 2. Navigate to Claim Events 3. Edit existing event name 4. Save 5. Verify updated name appears in list",Not Executed
+TC_EVT_004,Delete Event,"1. Login 2. Navigate to Claim Events 3. Select event 4. Delete 5. Confirm deletion 6. Verify event is removed",Not Executed
+TC_CLM_001,Create Claim (Self),"1. Login 2. Navigate to Claims 3. Create prerequisite event 4. Create claim with event and remarks 5. Submit claim 6. Verify claim appears in list",Not Executed
+TC_CLM_002,Read Claim (Self),"1. Login 2. Navigate to Claims 3. Search for existing claim by event 4. Verify claim row is visible",Not Executed
+TC_CLM_003,Update Claim (Self),"1. Login 2. Navigate to Claims 3. Open existing claim 4. Update remarks 5. Save 6. Verify updated remarks appear",Not Executed
+TC_CLM_004,Delete Claim (Self),"1. Login 2. Navigate to Claims 3. Select claim 4. Delete 5. Confirm deletion 6. Verify claim is removed",Not Executed

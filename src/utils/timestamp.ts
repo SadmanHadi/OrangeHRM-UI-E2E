@@ -3,7 +3,8 @@
  * Parallel-safe: avoids collisions even when multiple workers create entities simultaneously.
  */
 export function uniqueName(prefix: string): string {
-  const ts = Date.now().toString().slice(-6);
-  const rnd = Math.floor(Math.random() * 1000);
-  return `${prefix}_${ts}_${rnd}`;
+    const ts = Date.now().toString(36);
+    const rnd = Math.random().toString(36).slice(2, 6);
+    const name = `${prefix}_${ts}_${rnd}`;
+    return name.substring(0, 30);
 }

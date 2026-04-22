@@ -1,36 +1,73 @@
 services:
   ohrm-db:
-    image: mariadb:10.11
+    image: mariadb:10.4
+    container_name: orangehrm_db
+    restart: unless-stopped
+    # Memory-efficient MariaDB flags to prevent OOM kills in Docker Desktop
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+      - "--innodb-buffer-pool-size=256M"
+      - "--key-buffer-size=32M"
+      - "--max-connections=100"
+      - "--innodb-log-file-size=64M"
+      - "--innodb-flush-log-at-trx-commit=2"
+      - "--sync-binlog=0"
+      - "--innodb-use-native-aio=0"
     environment:
-      MARIADB_ROOT_PASSWORD: root_password
-      MARIADB_USER: orangehrm
-      MARIADB_PASSWORD: orangehrm_password
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-Root123}
+      MYSQL_DATABASE: ${DB_NAME:-orangehrm}
     volumes:
       - mariadb_data:/var/lib/mysql
     healthcheck:
-      test: ['CMD', 'mariadb-admin', 'ping', '-h', 'localhost', '-uroot', '-proot_password']
+      test:
+        [
+          "CMD",
+          "mariadb-admin",
+          "ping",
+          "-h",
+          "127.0.0.1",
+          "-u",
+          "root",
+          "--password=${DB_ROOT_PASSWORD:-Root123}",
+        ]
       interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 15
+      start_period: 45s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - ohrm-net
 
   orangehrm:
     image: orangehrm/orangehrm:latest
-    environment:
-      ORANGE_DB_HOST: ohrm-db
-      ORANGE_DB_PORT: 3306
-      ORANGE_DB_NAME: orangehrm
-      ORANGE_DB_USER: orangehrm
-      ORANGE_DB_PASSWORD: orangehrm_password
-      ORANGE_ADMIN_USERNAME: admin
-      ORANGE_ADMIN_PASSWORD: Admin@1234
+    container_name: orangehrm_app
+    restart: unless-stopped
     ports:
-      - '80:80'
+      - "${ORANGEHRM_PORT:-80}:80"
+    environment:
+      ORANGEHRM_DATABASE_HOST: ohrm-db
+      ORANGEHRM_DATABASE_PORT: "3306"
+      ORANGEHRM_DATABASE_NAME: ${DB_NAME:-orangehrm}
+      ORANGEHRM_DATABASE_USER: ${DB_USER:-orangehrm}
+      ORANGEHRM_DATABASE_PASSWORD: ${DB_PASSWORD:-Orange123}
     depends_on:
       ohrm-db:
         condition: service_healthy
-    volumes:
-      - orangehrm_data:/var/www/html/src/log
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    networks:
+      - ohrm-net
 
 volumes:
   mariadb_data:
   orangehrm_data:
+
+networks:
+  ohrm-net:
+    driver: bridge

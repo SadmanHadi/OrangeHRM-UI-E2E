@@ -4,3 +4,6 @@ artifacts/
 playwright-report/
 test-results/
 .env
+graphify-out/
+eslint-report.json
+lint-report.json

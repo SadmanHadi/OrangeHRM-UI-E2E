@@ -1,13 +1,13 @@
-import { Page } from '@playwright/test';
-import { LeaveTypePage } from '../pages/LeaveTypePage';
+import { Page } from "@playwright/test";
+import { LeaveTypePage } from "../pages/dashboard/LeaveTypePage";
 
 /**
  * Project-specific setup helper to create a leave type.
  * Uses the LeaveTypePage POM.
  */
 export async function createLeaveType(page: Page, name: string): Promise<void> {
-  const leaveTypePage = new LeaveTypePage(page);
-  await leaveTypePage.create(name);
+    const leaveTypePage = new LeaveTypePage(page);
+    await leaveTypePage.create(name);
 }
 
 /**
@@ -15,6 +15,6 @@ export async function createLeaveType(page: Page, name: string): Promise<void> {
  * Uses the LeaveTypePage POM.
  */
 export async function deleteLeaveType(page: Page, name: string): Promise<void> {
-  const leaveTypePage = new LeaveTypePage(page);
-  await leaveTypePage.delete(name);
+    const leaveTypePage = new LeaveTypePage(page);
+    await leaveTypePage.delete(name);
 }
