@@ -74,7 +74,7 @@ async function install() {
                     'label:has-text("I accept the terms in the License Agreement")',
                 );
                 if (await checkbox.isVisible()) {
-                    await checkbox.click();
+                    await checkbox.locator("span.oxd-checkbox-input").click();
                     await page.waitForTimeout(500);
                 }
 
@@ -125,10 +125,8 @@ async function install() {
             'label:has-text("Use the same Database User for OrangeHRM")',
         );
         if (await useSameUserLabel.isVisible()) {
-            await useSameUserLabel
-                .locator('input[type="checkbox"], span')
-                .first()
-                .click();
+            // Click the visible span overlay — the hidden input is blocked by it
+            await useSameUserLabel.locator("span.oxd-checkbox-input").click();
         }
 
         await fillInput("Privileged Database Username", "root");

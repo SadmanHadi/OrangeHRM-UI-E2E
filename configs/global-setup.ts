@@ -149,38 +149,6 @@ class Conf {
     }
 }
 
-async function waitForLoginRouteReady(
-    page: any,
-    baseURL: string,
-    retries = 60,
-) {
-    for (let i = 0; i < retries; i++) {
-        try {
-            const resp = await page.goto(baseURL, {
-                waitUntil: "domcontentloaded",
-                timeout: 10000,
-            });
-            const status = resp?.status() || 0;
-            const content = await page.content();
-            const schemaReady = isDatabaseSchemaReady();
-
-            if (status === 200 && content.includes("Login") && schemaReady) {
-                console.log(
-                    "[global-setup] ✓ App is ready and rendering Login page.",
-                );
-                return true;
-            }
-            console.log(
-                `[global-setup] Waiting for app readiness (attempt ${i + 1}/${retries}, status=${status}, db_schema=${schemaReady})...`,
-            );
-        } catch {
-            // ignore
-        }
-        await sleep(5000);
-    }
-    return false;
-}
-
 async function globalSetup(config: FullConfig) {
     // Load root .env first (CI writes here), then configs/.env overrides for local dev
     dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
@@ -266,7 +234,9 @@ async function globalSetup(config: FullConfig) {
                 );
                 throw new Error("[global-setup] Automated installer failed.");
             }
-            await waitForLoginRouteReady(page, baseURL!);
+            console.log(
+                "[global-setup] Installer done, navigating to login...",
+            );
         }
 
         // Normal login flow

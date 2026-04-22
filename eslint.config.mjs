@@ -17,6 +17,7 @@ export default [
             "dist/**",
             "pages/**",
             "playwright-report/**",
+            "**/playwright-report/**",
             "test-results/**",
             "graphify-out/**",
             "artifacts/**",
