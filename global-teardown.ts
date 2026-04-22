@@ -1,5 +1,3 @@
-import { stopOrangeHRM } from "./scripts/stop-orangehrm";
-
 /**
  * global-teardown.ts
  * Runs after all tests complete.

@@ -27,7 +27,7 @@ export class EventActions extends BasePage {
         await configureTab.waitFor({ state: "visible", timeout: 15000 });
         await configureTab.click();
 
-        const eventsLink = this.page.locator(`.oxd-dropdown-menu a`, {
+        const eventsLink = this.page.locator(".oxd-dropdown-menu a", {
             hasText: EventLocators.eventsLink,
         });
         await eventsLink.waitFor({ state: "visible", timeout: 5000 });

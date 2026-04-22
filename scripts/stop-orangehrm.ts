@@ -22,13 +22,13 @@ export function stopOrangeHRM(): void {
                         `[stop-orangehrm] Removing orphaned volume: ${volume}`,
                     );
                     execSync(`docker volume rm ${volume}`, { stdio: "pipe" });
-                } catch (error) {
+                } catch {
                     // Volume in use, try force remove
                     try {
                         execSync(`docker volume rm -f ${volume}`, {
                             stdio: "pipe",
                         });
-                    } catch (e) {
+                    } catch {
                         console.warn(
                             `[stop-orangehrm] Could not remove ${volume}, it may be in use`,
                         );
@@ -36,7 +36,7 @@ export function stopOrangeHRM(): void {
                 }
             }
         }
-    } catch (error) {
+    } catch {
         // Ignore errors during cleanup
     }
 

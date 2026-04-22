@@ -1,7 +1,7 @@
 import { expect, type Page } from "@playwright/test";
 import { ClaimLocators } from "../locators/ClaimLocators";
 import { BasePage } from "../../login/base";
-import { getInputByLabel, getTextareaByLabel } from "../../../utils/common";
+import { getTextareaByLabel } from "../../../utils/common";
 
 /**
  * Action methods for the Claim (Self) module.
@@ -160,7 +160,9 @@ export class ClaimActions extends BasePage {
             await input.fill(eventName);
         }
         await this.page.getByRole("button", { name: "Search" }).click();
-        await this.page.waitForLoadState("networkidle");
+        await this.page
+            .locator(".oxd-table-body")
+            .waitFor({ state: "attached", timeout: 15000 });
 
         const row = this.page.locator(ClaimLocators.tableCard, {
             hasText: eventName,
@@ -198,9 +200,13 @@ export class ClaimActions extends BasePage {
             ) {
                 await confirmBtn.click();
             }
-            await expect(this.page.locator(ClaimLocators.successToast))
-                .toBeVisible({ timeout: 15000 })
-                .catch(() => {});
+            try {
+                await expect(
+                    this.page.locator(ClaimLocators.successToast),
+                ).toBeVisible({ timeout: 15000 });
+            } catch {
+                // Ignore toast timeout
+            }
         } else {
             console.warn(
                 `[ClaimActions.delete] UI Delete button missing in 5.8.1. Falling back to Database Deletion for: ${remarks || eventName}`,
@@ -208,9 +214,8 @@ export class ClaimActions extends BasePage {
             const {
                 DatabaseUtils,
             } = require("../../../utils/common/database_utils");
-            DatabaseUtils.deleteClaimByName(remarks || eventName);
+            await DatabaseUtils.deleteClaimByName(remarks || eventName);
 
-            await this.page.waitForTimeout(1000);
             await this.navigate();
         }
     }

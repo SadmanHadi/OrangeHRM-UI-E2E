@@ -13,7 +13,7 @@ async function startOrangeHRM() {
     console.log("[start-orangehrm] Starting OrangeHRM via Docker Compose...");
     try {
         execSync("docker compose up -d --remove-orphans", { stdio: "inherit" });
-    } catch (error) {
+    } catch {
         console.warn(
             "[global-setup] Warning: docker compose up failed. Assuming server is already running or managed externally.",
         );
@@ -59,13 +59,13 @@ async function waitForContainersReady(retries = 30) {
                         "[global-setup] ✓ MariaDB is healthy and accepting connections.",
                     );
                     return true;
-                } catch (e) {
+                } catch {
                     console.log(
                         "[global-setup] MariaDB is healthy but not yet accepting connections (waiting for init)...",
                     );
                 }
             }
-        } catch (e) {
+        } catch {
             // ignore
         }
         await sleep(5000);
@@ -86,12 +86,12 @@ function isDatabaseSchemaReady(): boolean {
             { stdio: "pipe" },
         ).toString();
         return result.includes("ohrm_user");
-    } catch (e) {
+    } catch {
         return false;
     }
 }
 
-async function ensureConfFileInContainer(
+async function _ensureConfFileInContainer(
     dbHost: string = process.env.DB_HOST || "ohrm-db",
     dbPort: string = process.env.DB_PORT || "3306",
     dbName: string = process.env.DB_NAME || "orangehrm",
@@ -199,7 +199,7 @@ async function waitForLoginRouteReady(
             console.log(
                 `[global-setup] Waiting for app readiness (attempt ${i + 1}/${retries}, status=${status}, db_schema=${schemaReady})...`,
             );
-        } catch (e) {
+        } catch {
             // ignore
         }
         await sleep(5000);
@@ -208,14 +208,12 @@ async function waitForLoginRouteReady(
 }
 
 async function globalSetup(config: FullConfig) {
+    dotenv.config({ override: true });
     const { baseURL, storageState } = config.projects[0].use;
     const AUTH_FILE =
         typeof storageState === "string" ? storageState : "storageState.json";
     const username = process.env.ADMIN_USERNAME || "admin";
     const password = process.env.ADMIN_PASSWORD || "Admin123!";
-    const dbName = process.env.DB_NAME || "orangehrm";
-    const dbUser = process.env.DB_USER || "orangehrm";
-    const dbPassword = process.env.DB_PASSWORD || "Orange123";
 
     console.log(
         "[global-setup] Env presence { BASE_URL: true, ADMIN_USERNAME: true, ADMIN_PASSWORD: true }",
@@ -292,7 +290,7 @@ async function globalSetup(config: FullConfig) {
                 console.log("[global-setup] ✓ Successfully logged in");
                 loginSucceeded = true;
                 break;
-            } catch (err) {
+            } catch {
                 if (i % 2 === 0) {
                     console.log(
                         `[global-setup] Login attempt ${i + 1}/10 failed, retrying...`,

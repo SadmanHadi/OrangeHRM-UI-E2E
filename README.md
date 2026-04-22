@@ -133,4 +133,4 @@ To run the CI pipeline, add these secrets to your repository:
 
 ---
 
-_Built with ❤️ for the OrangeHRM E2E Bootcamp._
+_Built with ❤️ for the Bootcamp._

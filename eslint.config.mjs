@@ -100,7 +100,7 @@ export default [
             // ✅ Core JS rules
             "no-debugger": "error",
             semi: ["error", "always"],
-            quotes: ["error", "double"],
+            quotes: ["error", "double", { avoidEscape: true }],
             curly: ["error", "all"],
             "prefer-const": "warn",
             "arrow-parens": ["error", "always"],
