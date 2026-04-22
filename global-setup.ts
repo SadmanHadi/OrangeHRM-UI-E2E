@@ -4,35 +4,11 @@ import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
 import { LoginPage } from "./src/pages/login/LoginPage";
-
-dotenv.config({ override: true });
+import { startOrangeHRM } from "./scripts/start-orangehrm";
+import { stopOrangeHRM } from "./scripts/stop-orangehrm";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function startOrangeHRM() {
-    console.log("[start-orangehrm] Starting OrangeHRM via Docker Compose...");
-    try {
-        execSync("docker compose up -d --remove-orphans", { stdio: "inherit" });
-    } catch {
-        console.warn(
-            "[global-setup] Warning: docker compose up failed. Assuming server is already running or managed externally.",
-        );
-    }
-}
-
-async function stopOrangeHRM() {
-    console.log("[stop-orangehrm] Stopping OrangeHRM via Docker Compose...");
-    try {
-        execSync("docker compose down -v --remove-orphans", {
-            stdio: "inherit",
-        });
-        console.log("[stop-orangehrm] Ensuring all volumes are removed...");
-        execSync("docker volume prune -f", { stdio: "ignore" });
-        console.log("[stop-orangehrm] OrangeHRM stopped and volumes cleaned.");
-    } catch (error) {
-        console.error("[stop-orangehrm] Error stopping services:", error);
-    }
-}
 
 async function waitForContainersReady(retries = 30) {
     const rootPass = process.env.DB_ROOT_PASSWORD || "root";
@@ -222,7 +198,7 @@ async function globalSetup(config: FullConfig) {
         "[global-setup] Ensuring OrangeHRM is running via Docker Compose...",
     );
 
-    await startOrangeHRM();
+    startOrangeHRM();
     const ready = await waitForContainersReady(36);
     if (!ready) {
         throw new Error(
@@ -254,7 +230,7 @@ async function globalSetup(config: FullConfig) {
                         "[global-setup] Running OrangeHRM REST API installer...",
                     );
                     try {
-                        execSync("npx tsx scripts/ui-installer.ts", {
+                        execSync("pnpm exec tsx scripts/ui-installer.ts", {
                             stdio: "inherit",
                         });
                         console.log(
@@ -268,9 +244,9 @@ async function globalSetup(config: FullConfig) {
                         );
                         if (!installerResetAttempted) {
                             installerResetAttempted = true;
-                            await stopOrangeHRM();
+                            stopOrangeHRM();
                             await sleep(5000);
-                            await startOrangeHRM();
+                            startOrangeHRM();
                             await waitForContainersReady(36);
                             continue;
                         }
