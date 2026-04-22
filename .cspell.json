@@ -1,0 +1,29 @@
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+        "venv",
+        "orangehrm",
+        "ohrm",
+        "innodb",
+        "binlog",
+        "healthcheck",
+        "confs",
+        "networkidle",
+        "domcontentloaded",
+        "topbar",
+        "Bootcamp",
+        "pnpm",
+        "playwright",
+        "tsx",
+        "monocart",
+        "graphify"
+    ],
+    "ignorePaths": [
+        "node_modules/**",
+        "dist/**",
+        "playwright-report/**",
+        "test-results/**",
+        ".venv/**"
+    ]
+}
