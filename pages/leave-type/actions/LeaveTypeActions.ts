@@ -31,7 +31,9 @@ export class LeaveTypeActions extends BasePage {
             .locator(".oxd-form")
             .waitFor({ state: "visible", timeout: 10000 });
 
-        const formInput = getInputByLabel(this.page, { labelText: LeaveTypeLocators.leaveTypeNameLabel });
+        const formInput = getInputByLabel(this.page, {
+            labelText: LeaveTypeLocators.leaveTypeNameLabel,
+        });
         await formInput.waitFor({ state: "visible", timeout: 5000 });
         await formInput.click();
         await formInput.fill(name);
@@ -77,7 +79,9 @@ export class LeaveTypeActions extends BasePage {
             .locator(".oxd-form")
             .waitFor({ state: "visible", timeout: 10000 });
 
-        const formInput = getInputByLabel(this.page, { labelText: LeaveTypeLocators.leaveTypeNameLabel });
+        const formInput = getInputByLabel(this.page, {
+            labelText: LeaveTypeLocators.leaveTypeNameLabel,
+        });
         await formInput.waitFor({ state: "visible", timeout: 5000 });
         await formInput.click();
         await formInput.press("Control+a");
